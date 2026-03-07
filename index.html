@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAKIYA — Live Demo Showcase (Naija Edition)</title>
+<!-- Single font: Inter (clean, modern) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0;--bg2:#ede9e2;--bg3:#e2ddd5;
+  --white:#ffffff;--ink:#1c1812;--ink2:#3b3527;--ink3:#7a7060;--ink4:#b5ad9f;
+  --blue:#1a4fe8;--blue2:#3d6fff;--blue-lt:#eef2fd;
+  --amber:#d97706;--amber2:#f59e0b;--amber-lt:#fffbeb;--amber-md:#fef3c7;
+  --green:#0f7a52;--green2:#10b981;--green-lt:#f0fdf8;
+  --rose:#be185d;--rose-lt:#fdf2f8;
+  --gold:#ca8a04;--gold-lt:#fefce8;
+  --border:#e2ddd5;
+  --r:14px;--r2:22px;
+  --sx:0 1px 3px rgba(28,24,18,.07);
+  --sm:0 2px 10px rgba(28,24,18,.08);
+  --s:0 4px 20px rgba(28,24,18,.10);
+  --md:0 8px 32px rgba(28,24,18,.13);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:200;background:rgba(247,245,240,.93);backdrop-filter:blur(18px);box-shadow:var(--sx)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--amber),#b45309);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:17px;font-weight:800;color:#fff;box-shadow:0 3px 10px rgba(217,119,6,.27)}
+.logo-text{font-family:'Inter',sans-serif;font-size:19px;font-weight:800;color:var(--ink);letter-spacing:1.5px}
+.logo-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid rgba(26,79,232,.22);padding:3px 9px;border-radius:20px;color:var(--blue);background:var(--blue-lt)}
+.live-badge{display:flex;align-items:center;gap:6px;background:var(--green-lt);border:1.5px solid rgba(15,122,82,.25);padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:700;color:var(--green)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livePulse 1.5s infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.72)}}
+.hdr-r{display:flex;align-items:center;gap:9px}
+
+/* CTRL BUTTON */
+.cb{padding:8px 18px;border-radius:28px;border:1.5px solid var(--border);background:var(--white);color:var(--ink2);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s;display:inline-flex;align-items:center;gap:6px}
+.cb:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:var(--sm)}
+.cb.pri{background:linear-gradient(135deg,var(--amber),#b45309);border:none;color:#fff;box-shadow:0 4px 14px rgba(217,119,6,.27)}
+.cb.pri:hover{transform:translateY(-2px);box-shadow:0 7px 22px rgba(217,119,6,.38)}
+.cb.act{border-color:var(--green);color:var(--green);background:var(--green-lt)}
+
+/* HERO */
+.hero{text-align:center;padding:56px 24px 40px;background:linear-gradient(180deg,var(--amber-lt) 0%,var(--bg) 100%);border-bottom:1.5px solid var(--border);position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:560px;height:250px;background:radial-gradient(ellipse,rgba(26,79,232,.07) 0%,transparent 70%);pointer-events:none}
+.hero-label{display:inline-flex;align-items:center;gap:7px;background:var(--amber-md);border:1.5px solid rgba(202,138,4,.28);padding:5px 14px;border-radius:20px;font-size:11.5px;font-weight:700;color:var(--gold);margin-bottom:18px;letter-spacing:.07em;text-transform:uppercase}
+.hero h1{font-family:'Inter',sans-serif;font-size:clamp(26px,4.2vw,52px);font-weight:800;line-height:1.1;color:var(--ink);margin-bottom:13px}
+.hero h1 .ac{background:linear-gradient(90deg,var(--blue),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15.5px;color:var(--ink3);max-width:510px;margin:0 auto 28px;line-height:1.7}
+.ctrl-bar{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:0}
+
+/* BIRTHDAY BANNER */
+.bb{max-width:1200px;margin:24px auto;padding:0 18px}
+.bb-in{background:linear-gradient(135deg,var(--amber-md),#fff7ed);border:1.5px solid rgba(202,138,4,.28);border-radius:var(--r2);padding:18px 22px;box-shadow:var(--sm)}
+.bb-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:9px}
+.bb-title{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:7px}
+.bb-sub{font-size:11.5px;color:var(--ink3);font-weight:500;margin-top:2px}
+.bb-scroll{display:flex;gap:11px;overflow-x:auto;padding-bottom:4px}
+.bb-scroll::-webkit-scrollbar{height:4px}
+.bb-scroll::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:4px}
+
+/* BIRTHDAY CARD */
+.bc{flex:0 0 auto;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:13px 15px;min-width:175px;box-shadow:var(--sx);transition:all .22s;position:relative;overflow:hidden}
+.bc:hover{transform:translateY(-2px);box-shadow:var(--sm);border-color:var(--amber2)}
+.bc.urg{border-color:rgba(217,119,6,.48);background:linear-gradient(135deg,#fffbeb,#fff7ed)}
+.bc.urg::before,.bc.sn::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.bc.urg::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
+.bc.sn::before{background:linear-gradient(90deg,var(--green),var(--green2))}
+.bc-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.bc-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.bc-name{font-size:13px;font-weight:700;color:var(--ink)}
+.bc-dept{font-size:10.5px;color:var(--ink3);margin-top:1px}
+.bc-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:800;margin-bottom:6px}
+.t-urg{background:var(--amber-md);color:#92400e}
+.t-sn{background:var(--green-lt);color:var(--green)}
+.t-up{background:var(--blue-lt);color:var(--blue)}
+.bc-date{font-size:11.5px;font-weight:600;color:var(--ink3);margin-bottom:7px}
+.bc-cd{display:flex;gap:5px;align-items:center}
+.bc-unit{text-align:center}
+.bc-num{font-family:'Inter',monospace;font-size:17px;font-weight:600;background:var(--bg2);border-radius:7px;padding:3px 7px;display:block;min-width:36px;color:var(--ink);border:1px solid var(--border)}
+.bc.urg .bc-num{background:var(--amber-md);color:#92400e;border-color:rgba(202,138,4,.22)}
+.bc.sn .bc-num{background:var(--green-lt);color:var(--green);border-color:rgba(15,122,82,.18)}
+.bc-lbl{font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);margin-top:2px}
+.bc-sep{font-size:12px;color:var(--ink4);padding-bottom:10px;font-weight:700}
+.bc-btn{margin-top:9px;padding:6px 0;width:100%;border-radius:8px;border:1.5px solid var(--amber);background:var(--amber-lt);color:var(--amber);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.bc-btn:hover{background:var(--amber);color:#fff}
+.bc-btn.sn-btn{border-color:var(--green);background:var(--green-lt);color:var(--green)}
+.bc-btn.sn-btn:hover{background:var(--green);color:#fff}
+
+/* DEMO AREA */
+.demo-area{max-width:1200px;margin:0 auto;padding:0 18px 64px;display:grid;grid-template-columns:290px 1fr;gap:20px}
+
+/* TIMELINE PANEL */
+.tl-panel{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);padding:20px;height:fit-content;position:sticky;top:74px;box-shadow:var(--sx)}
+.panel-title{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:17px;display:flex;align-items:center;gap:7px}
+.tl-step{display:flex;gap:12px;margin-bottom:5px;cursor:pointer;transition:all .2s}
+.tl-step:hover .tl-step-label{color:var(--ink)}
+.tl-left{display:flex;flex-direction:column;align-items:center}
+.tl-num{width:29px;height:29px;border-radius:50%;border:2px solid var(--bg3);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;color:var(--ink3);flex-shrink:0;transition:all .3s;font-family:'Inter',monospace}
+.tl-num.done{background:var(--green);border-color:var(--green);color:#fff}
+.tl-num.active{background:var(--blue-lt);border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 4px rgba(26,79,232,.11);animation:ag 2s infinite}
+@keyframes ag{0%,100%{box-shadow:0 0 0 4px rgba(26,79,232,.11)}50%{box-shadow:0 0 0 8px rgba(26,79,232,.04)}}
+.tl-line{width:2px;flex:1;min-height:16px;background:var(--bg3);margin:4px 0;border-radius:2px;transition:background .5s}
+.tl-line.done{background:var(--green)}
+.tl-step-content{padding-top:4px;flex:1}
+.tl-step-label{font-size:13px;font-weight:600;color:var(--ink3);transition:color .3s;margin-bottom:1px}
+.tl-step-label.active{color:var(--ink);font-weight:700}
+.tl-step-label.done{color:var(--green)}
+.tl-step-sub{font-size:11px;color:var(--ink4);line-height:1.5}
+
+.op{margin-top:18px;padding-top:16px;border-top:1.5px solid var(--bg3)}
+.op-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:6px;font-weight:600}
+.op-track{height:6px;background:var(--bg2);border-radius:10px;overflow:hidden}
+.op-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green2));border-radius:10px;transition:width 1s ease;width:0%}
+
+.sc{margin-top:14px;padding-top:12px;border-top:1.5px solid var(--bg3)}
+.sc-lbl{font-size:11px;color:var(--ink3);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.sc-btns{display:flex;gap:4px}
+.sc-btn{flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--bg3);background:var(--bg);color:var(--ink3);font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',monospace}
+.sc-btn:hover,.sc-btn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
+
+.lm{margin-top:14px;padding-top:12px;border-top:1.5px solid var(--bg3)}
+.lm-t{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:10px}
+.lm-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
+.lm-row span:first-child{color:var(--ink3)}
+.lm-row span:last-child{font-family:'Inter',monospace;font-weight:600;color:var(--ink)}
+
+/* MAIN STAGE */
+.ms{display:flex;flex-direction:column;gap:16px}
+
+/* SCENE CARDS */
+.sc-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:all .4s;opacity:.36;transform:translateY(6px);box-shadow:var(--sx)}
+.sc-card.active{opacity:1;transform:translateY(0);border-color:rgba(26,79,232,.33);box-shadow:0 0 0 1px rgba(26,79,232,.11),var(--md)}
+.sc-card.done{opacity:.65;transform:translateY(0);border-color:rgba(15,122,82,.22)}
+.sc-hdr{display:flex;align-items:center;justify-content:space-between;padding:15px 19px;border-bottom:1.5px solid var(--bg3);background:var(--bg)}
+.sc-hdr-l{display:flex;align-items:center;gap:10px}
+.sc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.sc-title{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:800;color:var(--ink)}
+.sc-desc{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.status-chip{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.cw{background:var(--bg2);color:var(--ink3);border:1.5px solid var(--bg3)}
+.ca{background:var(--blue-lt);color:var(--blue);border:1.5px solid rgba(26,79,232,.28);animation:cp 2s infinite}
+@keyframes cp{0%,100%{opacity:1}50%{opacity:.6}}
+.cd2{background:var(--green-lt);color:var(--green);border:1.5px solid rgba(15,122,82,.22)}
+.sc-body{padding:19px}
+
+/* SCENE 1 */
+.pf{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.pf label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:5px}
+.fi{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;color:var(--ink);font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;transition:all .3s}
+.fi.typing{border-color:var(--blue);background:var(--blue-lt);box-shadow:0 0 0 3px rgba(26,79,232,.09)}
+.fi.done{border-color:rgba(15,122,82,.38);background:var(--green-lt)}
+.cd-disp{display:flex;gap:12px;align-items:center;justify-content:center;padding:16px;background:linear-gradient(135deg,var(--blue-lt),rgba(190,24,93,.05));border-radius:var(--r);border:1.5px solid rgba(26,79,232,.16);margin-top:11px;opacity:0;transform:translateY(8px);transition:all .5s}
+.cd-disp.show{opacity:1;transform:translateY(0)}
+.cd-unit{text-align:center}
+.cd-num{font-family:'Inter',monospace;font-size:30px;font-weight:600;color:var(--ink);display:block;background:var(--white);border-radius:8px;padding:5px 10px;min-width:58px;border:1.5px solid var(--border);box-shadow:var(--sx)}
+.cd-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-top:4px}
+.cd-sep{font-size:22px;color:var(--ink3);padding-bottom:13px;font-weight:700}
+.gl{margin-top:15px}
+.gl-title{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:9px}
+.g-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border-radius:8px;margin-bottom:5px;border:1.5px solid var(--border);opacity:0;transform:translateX(-9px);transition:all .4s}
+.g-row.ap{opacity:1;transform:translateX(0)}
+.g-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.g-name{font-size:12.5px;font-weight:700;flex:1;color:var(--ink)}
+.g-ch{font-size:11px;color:var(--ink3)}
+.g-st{font-size:11px;padding:2px 7px;border-radius:20px;font-weight:700}
+.gs-i{background:var(--blue-lt);color:var(--blue)}
+
+/* INVITES */
+.is{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.ist{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:12px;text-align:center;transition:all .4s}
+.ist.hl{background:var(--blue-lt);border-color:rgba(26,79,232,.28)}
+.ist-n{font-family:'Inter',monospace;font-size:21px;font-weight:600;color:var(--ink);display:block}
+.ist-l{font-size:10.5px;color:var(--ink3);margin-top:3px;font-weight:600}
+.ip{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:14px}
+.wa-c{background:linear-gradient(135deg,#064e3b,#065f46);border-radius:var(--r);padding:15px;position:relative;overflow:hidden}
+.wa-h{font-size:10.5px;opacity:.65;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;color:#fff}
+.wa-bbl{background:rgba(255,255,255,.14);border-radius:10px 10px 10px 3px;padding:10px 13px;font-size:12.5px;line-height:1.65;color:#fff}
+.wa-typ{display:none;align-items:center;gap:4px;padding:8px 12px;background:rgba(255,255,255,.1);border-radius:10px 10px 10px 3px;margin-bottom:7px}
+.wa-typ.show{display:flex}
+.wa-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6);animation:tb .8s infinite}
+.wa-dot:nth-child(2){animation-delay:.1s}.wa-dot:nth-child(3){animation-delay:.2s}
+@keyframes tb{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.em-c{background:#fff;border-radius:var(--r);padding:15px;border:1.5px solid var(--border);box-shadow:var(--sx)}
+.em-hb{border-bottom:1px solid #eee;padding-bottom:9px;margin-bottom:9px}
+.em-fr{font-size:10.5px;color:#888;margin-bottom:2px}
+.em-sub{font-size:13px;font-weight:700;color:var(--ink)}
+.em-body{font-size:12px;color:#333;line-height:1.65;margin-bottom:10px}
+.em-cta{background:linear-gradient(135deg,var(--amber),#b45309);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.tt{width:100%;border-collapse:collapse}
+.tt th{text-align:left;padding:8px 12px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);border-bottom:2px solid var(--bg3)}
+.tt td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--bg2);transition:all .3s}
+.tt tr:last-child td{border-bottom:none}
+.tt tr:hover td{background:var(--bg)}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:700}
+.cg{background:var(--green-lt);color:var(--green)}
+.cb2{background:var(--blue-lt);color:var(--blue)}
+.cgold{background:var(--gold-lt);color:var(--gold)}
+.cgray{background:var(--bg2);color:var(--ink3)}
+
+/* WISH COLLECTION */
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.wt-c{background:var(--bg);border:2px solid var(--border);border-radius:var(--r);padding:15px;text-align:center;cursor:pointer;transition:all .3s}
+.wt-c.sel{border-color:var(--blue);background:var(--blue-lt);box-shadow:0 0 0 4px rgba(26,79,232,.09)}
+.wt-ic{font-size:24px;margin-bottom:6px}
+.wt-lb{font-size:13px;font-weight:700;color:var(--ink)}
+.wt-sb{font-size:11px;color:var(--ink3);margin-top:2px}
+.rz{background:var(--bg);border:2px dashed var(--border);border-radius:var(--r);padding:22px;text-align:center;margin-bottom:12px}
+.rb{width:58px;height:58px;border-radius:50%;border:none;background:linear-gradient(135deg,#ef4444,#b91c1c);cursor:pointer;font-size:19px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:7px;transition:all .3s;box-shadow:0 5px 14px rgba(239,68,68,.26)}
+.rb.rec{animation:rp 1.5s infinite}
+@keyframes rp{0%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}70%{box-shadow:0 0 0 16px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.r-st{font-size:13px;color:var(--ink3);margin-top:4px}
+.r-tm{font-family:'Inter',monospace;font-size:26px;font-weight:600;color:#ef4444;margin-top:4px;display:none}
+.wf{display:flex;flex-direction:column;gap:6px}
+.wi{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;background:var(--bg);border-radius:9px;border:1.5px solid var(--border);opacity:0;transform:translateX(-9px);transition:all .5s}
+.wi.ap{opacity:1;transform:translateX(0)}
+.wi-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.wi-nm{font-size:12.5px;font-weight:700;color:var(--ink)}
+.wi-tm{font-size:10.5px;color:var(--ink3);margin:2px 0 3px}
+.wi-ct{font-size:12px;color:var(--ink2);line-height:1.5}
+.rc{position:relative;width:108px;height:108px}
+.rsv{transform:rotate(-90deg)}
+.rbg{fill:none;stroke:var(--bg3);stroke-width:9}
+.rf{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.rt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rp2{font-family:'Inter',monospace;font-size:19px;font-weight:600;color:var(--ink)}
+.rs{font-size:10.5px;color:var(--ink3);text-align:center;margin-top:2px}
+
+/* STUDIO */
+.vp{background:#0a0a18;border-radius:var(--r);aspect-ratio:16/9;position:relative;overflow:hidden;margin-bottom:13px}
+.vp-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,79,232,.22),rgba(190,24,93,.18));transition:opacity .8s}
+.vp-ct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.vp-em{font-size:42px;margin-bottom:11px;animation:fe 3s ease-in-out infinite}
+@keyframes fe{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.vp-tt{font-family:'Inter',sans-serif;font-size:1.3rem;font-weight:800;color:#fde68a;text-align:center;text-shadow:0 2px 14px rgba(253,230,138,.33)}
+.vp-st{font-size:12px;opacity:.55;margin-top:5px;color:#fff}
+.vp-pb{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#5a3fff);border:none;cursor:pointer;font-size:17px;color:#fff;margin-top:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 18px rgba(26,79,232,.33);transition:transform .2s}
+.vp-pb:hover{transform:scale(1.1)}
+.cs-list{display:flex;flex-direction:column;gap:8px;margin-bottom:13px}
+.cs-item{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--bg);border-radius:9px;border:1.5px solid var(--border);font-size:13px;opacity:.38;transition:all .4s}
+.cs-item.active{opacity:1;border-color:rgba(26,79,232,.28);background:var(--blue-lt)}
+.cs-item.done{opacity:.83;border-color:rgba(15,122,82,.22);background:var(--green-lt)}
+.cs-ic{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.cs-pb{height:4px;background:var(--bg3);border-radius:10px;overflow:hidden;margin-top:4px}
+.cs-pf{height:100%;background:linear-gradient(90deg,var(--blue),var(--rose));border-radius:10px;width:0%;transition:width .5s ease}
+.ug{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}
+.up{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:11px;text-align:center;font-size:12.5px;font-weight:700;transition:all .3s;opacity:.5}
+.up.upl{opacity:1;border-color:rgba(26,79,232,.38);background:var(--blue-lt);animation:ulp 1s infinite}
+@keyframes ulp{0%,100%{background:var(--blue-lt)}50%{background:#dce7ff}}
+.up.udn{opacity:1;border-color:rgba(15,122,82,.32);background:var(--green-lt)}
+.up-ic{font-size:22px;margin-bottom:4px}
+.up-pb{height:3px;background:var(--bg3);border-radius:10px;margin-top:6px;overflow:hidden}
+.up-pf{height:100%;border-radius:10px;transition:width 2s ease;width:0%}
+
+/* DELIVERY */
+.df{display:flex;align-items:center;gap:0;margin-bottom:16px;overflow-x:auto}
+.ds{flex:1;display:flex;flex-direction:column;align-items:center;min-width:72px}
+.di{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;border:2px solid var(--border);background:var(--bg);transition:all .5s;margin-bottom:6px}
+.di.done{border-color:var(--green);background:var(--green-lt)}
+.di.active{border-color:var(--blue);background:var(--blue-lt);box-shadow:0 0 0 5px rgba(26,79,232,.09)}
+.dl{font-size:10px;font-weight:700;color:var(--ink3);text-align:center;line-height:1.4}
+.dln{flex:0 0 28px;height:2px;background:var(--bg3);margin-bottom:20px;transition:background .8s}
+.dln.done{background:var(--green)}
+.dc{background:linear-gradient(135deg,var(--blue-lt),rgba(190,24,93,.04));border:1.5px solid rgba(26,79,232,.2);border-radius:var(--r);padding:15px;display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.da{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--amber),#b45309);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;color:#fff}
+.dn{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.dsb{font-size:12px;color:var(--ink3)}
+.de{margin-left:auto;text-align:right}
+.de-n{font-family:'Inter',monospace;font-size:18px;font-weight:600;color:var(--green)}
+.de-l{font-size:10.5px;color:var(--ink3)}
+
+/* NOTIFICATIONS */
+.ns{position:fixed;bottom:18px;right:18px;width:278px;z-index:1000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.nt{background:var(--white);border:1.5px solid var(--border);border-radius:11px;padding:10px 13px;display:flex;align-items:flex-start;gap:8px;animation:ni .38s cubic-bezier(.34,1.4,.64,1);pointer-events:auto;box-shadow:var(--md)}
+@keyframes ni{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+.ni{font-size:15px;flex-shrink:0;margin-top:1px}
+.nt-b{flex:1}
+.nt-m{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
+.nt-t{font-size:10px;color:var(--ink3);margin-top:1px}
+.nt.success{border-left:3px solid var(--green)}
+.nt.info{border-left:3px solid var(--blue)}
+.nt.warning{border-left:3px solid var(--amber)}
+
+/* COMPLETION */
+.co{display:none;position:fixed;inset:0;background:rgba(247,245,240,.9);z-index:10000;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+.co.show{display:flex}
+.co-c{background:var(--white);border:1.5px solid var(--border);border-radius:24px;padding:44px;text-align:center;max-width:490px;box-shadow:var(--md);animation:fu .44s ease}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.co-em{font-size:62px;margin-bottom:16px;animation:bo 1s ease infinite alternate}
+@keyframes bo{from{transform:scale(1)}to{transform:scale(1.07)}}
+.co-tt{font-family:'Inter',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px;background:linear-gradient(90deg,var(--gold),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.co-sb{font-size:14.5px;color:var(--ink3);margin-bottom:25px;line-height:1.65}
+.co-btn{padding:12px 30px;background:linear-gradient(135deg,var(--amber),#b45309);border:none;border-radius:26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 5px 18px rgba(217,119,6,.32);transition:all .22s}
+.co-btn:hover{transform:translateY(-2px);box-shadow:0 9px 26px rgba(217,119,6,.42)}
+
+@keyframes cf{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+.cp2{position:fixed;border-radius:2px;pointer-events:none;z-index:99999;animation:cf linear forwards}
+
+/* RESPONSIVE */
+@media(max-width:920px){.demo-area{grid-template-columns:1fr}.tl-panel{position:static}.pf{grid-template-columns:1fr 1fr}.ip{grid-template-columns:1fr}.is{grid-template-columns:1fr 1fr}.wg{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.hdr-r .cb:not(.pri){display:none}.pf{grid-template-columns:1fr}.ctrl-bar .cb:not(.pri){font-size:11.5px;padding:7px 12px}.hero h1{font-size:26px}.bc{min-width:155px}}
+</style>
+</head>
+<body>
+
+<div class="ns" id="ns"></div>
+
+<div class="co" id="co">
+  <div class="co-c">
+    <div class="co-em">🎉</div>
+    <div class="co-tt">Surprise Delivered!</div>
+    <div class="co-sb" id="co-sb">Chiamaka Okafor just received their birthday surprise video from 15 teammates. The entire journey — planning to delivery — took just <strong style="color:var(--ink)">4 minutes</strong> in demo mode.</div>
+    <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
+      <button class="co-btn" onclick="restartDemo()">▶ Run Demo Again</button>
+      <button style="padding:12px 22px;background:var(--bg);border:1.5px solid var(--border);border-radius:26px;color:var(--ink2);font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer" onclick="document.getElementById('co').classList.remove('show')">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="logo"><div class="logo-mark">D</div><div><div class="logo-text">DAKIYA</div></div></div>
+  <div style="display:flex;align-items:center;gap:8px"><div class="logo-badge">Enterprise Demo</div><div class="live-badge"><div class="live-dot"></div> Live Simulation</div></div>
+  <div class="hdr-r">
+    <button class="cb" onclick="restartDemo()">↺ Restart</button>
+    <button class="cb pri" id="mpb" onclick="startDemo()">▶ Start Full Demo</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">✦ Complete Automation Showcase · 2026</div>
+  <h1>Surprise Planner <span class="ac">→ Invite</span><br>→ Collect → <span class="ac">Compile → Deliver</span></h1>
+  <p class="hero-sub">Watch the full celebration journey unfold — from creating a surprise event to auto-delivering the video. Fully automated, in real time.</p>
+  <div class="ctrl-bar" style="margin-bottom:0">
+    <button class="cb pri" id="hpb" onclick="startDemo()">▶ Start Full Auto Demo</button>
+    <button class="cb" onclick="jumpToScene(1)">1. Planner</button>
+    <button class="cb" onclick="jumpToScene(2)">2. Invites</button>
+    <button class="cb" onclick="jumpToScene(3)">3. Wishes</button>
+    <button class="cb" onclick="jumpToScene(4)">4. Studio</button>
+    <button class="cb" onclick="jumpToScene(5)">5. Delivery</button>
+  </div>
+</div>
+
+<!-- BIRTHDAY BANNER -->
+<div class="bb">
+  <div class="bb-in">
+    <div class="bb-hdr">
+      <div>
+        <div class="bb-title">🎂 Upcoming Birthdays — 30-Day Radar</div>
+        <div class="bb-sub">Colleagues celebrating within the next 30 days · Start collecting wishes now — DAKIYA sends invites 30 days before!</div>
+      </div>
+      <button class="cb" style="font-size:11.5px;padding:6px 13px" onclick="buildBDays();notify('🔄 Birthday radar refreshed!','info')">↺ Refresh</button>
+    </div>
+    <div class="bb-scroll" id="bbs"></div>
+  </div>
+</div>
+
+<!-- DEMO AREA -->
+<div class="demo-area">
+
+  <!-- TIMELINE -->
+  <div class="tl-panel">
+    <div class="panel-title">📋 Demo Timeline</div>
+    <div class="tl-step" onclick="jumpToScene(1)"><div class="tl-left"><div class="tl-num" id="tln1">1</div><div class="tl-line" id="tll1"></div></div><div class="tl-step-content"><div class="tl-step-label" id="tls1">Surprise Planner</div><div class="tl-step-sub">Event details, countdown, guest list</div></div></div>
+    <div class="tl-step" onclick="jumpToScene(2)"><div class="tl-left"><div class="tl-num" id="tln2">2</div><div class="tl-line" id="tll2"></div></div><div class="tl-step-content"><div class="tl-step-label" id="tls2">Invite System</div><div class="tl-step-sub">WhatsApp + Email · AI personalised</div></div></div>
+    <div class="tl-step" onclick="jumpToScene(3)"><div class="tl-left"><div class="tl-num" id="tln3">3</div><div class="tl-line" id="tll3"></div></div><div class="tl-step-content"><div class="tl-step-label" id="tls3">Wish Collection</div><div class="tl-step-sub">Video, audio & text wishes live</div></div></div>
+    <div class="tl-step" onclick="jumpToScene(4)"><div class="tl-left"><div class="tl-num" id="tln4">4</div><div class="tl-line" id="tll4"></div></div><div class="tl-step-content"><div class="tl-step-label" id="tls4">AI Video Studio</div><div class="tl-step-sub">Auto-compile, music, effects, upload</div></div></div>
+    <div class="tl-step" onclick="jumpToScene(5)"><div class="tl-left"><div class="tl-num" id="tln5">5</div></div><div class="tl-step-content"><div class="tl-step-label" id="tls5">Surprise Delivery</div><div class="tl-step-sub">Auto-delivered on celebration day</div></div></div>
+    <div class="op"><div class="op-lbl"><span>Overall Progress</span><span id="opp">0%</span></div><div class="op-track"><div class="op-fill" id="opf"></div></div></div>
+    <div class="sc"><div class="sc-lbl">Demo Speed</div><div class="sc-btns">
+      <button class="sc-btn" onclick="setSpeed(2)">0.5×</button>
+      <button class="sc-btn active" onclick="setSpeed(1)">1×</button>
+      <button class="sc-btn" onclick="setSpeed(0.5)">2×</button>
+      <button class="sc-btn" onclick="setSpeed(0.25)">4×</button>
+    </div></div>
+    <div class="lm"><div class="lm-t">Live Metrics</div>
+      <div class="lm-row"><span>Wishes Collected</span><span id="mW">0/15</span></div>
+      <div class="lm-row"><span>Invites Sent</span><span id="mI">0</span></div>
+      <div class="lm-row"><span>Response Rate</span><span id="mR">—</span></div>
+      <div class="lm-row"><span>Video Status</span><span id="mV" style="font-family:'Inter',sans-serif;font-size:11.5px">Pending</span></div>
+    </div>
+  </div>
+
+  <!-- SCENES -->
+  <div class="ms">
+
+    <!-- S1 -->
+    <div class="sc-card" id="scene1">
+      <div class="sc-hdr"><div class="sc-hdr-l"><div class="sc-icon" style="background:var(--amber-lt)">🎉</div><div><div class="sc-title">SURPRISE PLANNER</div><div class="sc-desc">Create a 30-day automated surprise event</div></div></div><div class="status-chip cw" id="sc1s">⏳ Waiting</div></div>
+      <div class="sc-body">
+        <div class="pf">
+          <div><label>Celebrant Name</label><input class="fi" id="fn" readonly placeholder="Chiamaka Okafor" value=""></div>
+          <div><label>Occasion</label><input class="fi" id="ft" readonly placeholder="Birthday" value=""></div>
+          <div><label>Celebration Date</label><input class="fi" id="fd" readonly value=""></div>
+        </div>
+        <div class="cd-disp" id="cdd">
+          <div class="cd-unit"><span class="cd-num" id="cdd_d">--</span><div class="cd-lbl">Days</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><span class="cd-num" id="cdd_h">--</span><div class="cd-lbl">Hours</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><span class="cd-num" id="cdd_m">--</span><div class="cd-lbl">Mins</div></div>
+        </div>
+        <div class="gl" id="gla" style="display:none"><div class="gl-title">👥 Contributors Invited (15 teammates)</div><div id="gr"></div></div>
+        <div id="s1l" style="display:none;margin-top:13px"><div style="background:var(--green-lt);border:1.5px solid rgba(15,122,82,.22);border-radius:var(--r);padding:12px;display:flex;align-items:center;gap:10px"><span style="font-size:20px">🚀</span><div><div style="font-weight:700;font-size:13.5px;color:var(--green)">Surprise Event Launched!</div><div style="font-size:12px;color:var(--ink3);margin-top:2px">AI will auto-collect wishes for 28 days, then compile &amp; deliver on the birthday at 9:00 AM</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- S2 -->
+    <div class="sc-card" id="scene2">
+      <div class="sc-hdr"><div class="sc-hdr-l"><div class="sc-icon" style="background:var(--green-lt)">📨</div><div><div class="sc-title">INVITE SYSTEM</div><div class="sc-desc">WhatsApp + Email · AI-personalised for each recipient</div></div></div><div class="status-chip cw" id="sc2s">⏳ Waiting</div></div>
+      <div class="sc-body">
+        <div class="is">
+          <div class="ist" id="isSent"><span class="ist-n" id="isSn">0</span><div class="ist-l">Invites Sent</div></div>
+          <div class="ist" id="isOpen"><span class="ist-n" id="isOn">0</span><div class="ist-l">Opened</div></div>
+          <div class="ist"><span class="ist-n" id="isRn">0%</span><div class="ist-l">Response Rate</div></div>
+          <div class="ist"><span class="ist-n">AI</span><div class="ist-l">Personalised</div></div>
+        </div>
+        <div class="ip">
+          <div class="wa-c"><div class="wa-h">💬 WhatsApp Preview</div><div class="wa-typ" id="wt2"><div class="wa-dot"></div><div class="wa-dot"></div><div class="wa-dot"></div></div><div class="wa-bbl" id="wbb" style="display:none">Hey <b>Emeka</b>! 👋<br><br>I'm organising a surprise <b>Birthday</b> for <b>Chiamaka Okafor</b>! 🎂<br><br>Could you record a short wish? Takes just 2 minutes!<br><br>📅 Deadline: <b id="wdl">—</b><br>🎬 Your clip = part of the surprise video!<br><br><span style="color:#a8e6cf;text-decoration:underline">👉 Tap here →</span></div></div>
+          <div class="em-c"><div class="em-hb"><div class="em-fr">From: Dakiya &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e565b5252517e5a5f5557475f105f4e4e">[email&#160;protected]</a>&gt;</div><div class="em-sub" id="esub" style="opacity:.3">🎉 Help surprise Chiamaka for her Birthday!</div></div><div class="em-body" id="ebody" style="opacity:.3">Hi Emeka,<br><br>We're creating a surprise video for <b id="emf">Chiamaka's birthday</b>!<br><br>Click below → Record wish → We compile the surprise!<br><br>⏰ Deadline: <b id="edl">—</b></div><button class="em-cta">💌 Send Your Wish →</button></div>
+        </div>
+        <div style="overflow-x:auto"><table class="tt"><thead><tr><th>Contributor</th><th>Channel</th><th>Sent</th><th>Opened</th><th>Wish</th></tr></thead><tbody id="tb"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="sc-card" id="scene3">
+      <div class="sc-hdr"><div class="sc-hdr-l"><div class="sc-icon" style="background:var(--rose-lt)">💌</div><div><div class="sc-title">WISH COLLECTION</div><div class="sc-desc">Live feed as video, audio &amp; text wishes come in</div></div></div><div class="status-chip cw" id="sc3s">⏳ Waiting</div></div>
+      <div class="sc-body">
+        <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">
+          <div>
+            <div class="wg">
+              <div class="wt-c" id="wtv"><div class="wt-ic">🎥</div><div class="wt-lb">Video Wish</div><div class="wt-sb">Record yourself</div></div>
+              <div class="wt-c" id="wta"><div class="wt-ic">🎙️</div><div class="wt-lb">Audio Wish</div><div class="wt-sb">Voice message</div></div>
+              <div class="wt-c" id="wtt"><div class="wt-ic">✍️</div><div class="wt-lb">Text Wish</div><div class="wt-sb">Write message</div></div>
+            </div>
+            <div class="rz"><button class="rb" id="rbd">🎥</button><div class="r-st" id="rst">Press to record your wish</div><div class="r-tm" id="rtm">0:00</div></div>
+            <div><div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:8px">Live Wish Feed</div><div class="wf" id="wf"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div style="padding:14px 0"><div class="rc"><svg class="rsv" width="108" height="108" viewBox="0 0 108 108"><circle class="rbg" cx="54" cy="54" r="46"/><circle class="rf" id="wrf" cx="54" cy="54" r="46" stroke-dasharray="289" stroke-dashoffset="289"/></svg><div class="rt"><div class="rp2" id="wpc">0%</div><div class="rs" id="wct">0/15</div></div></div></div>
+            <div style="text-align:center;font-size:11.5px;color:var(--ink3);font-weight:600">Collection<br>Progress</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S4 -->
+    <div class="sc-card" id="scene4">
+      <div class="sc-hdr"><div class="sc-hdr-l"><div class="sc-icon" style="background:var(--gold-lt)">🎬</div><div><div class="sc-title">AI VIDEO STUDIO</div><div class="sc-desc">Auto-compile all wishes into a cinematic surprise video</div></div></div><div class="status-chip cw" id="sc4s">⏳ Waiting</div></div>
+      <div class="sc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <div class="vp"><div class="vp-bg"></div><div class="vp-ct"><div class="vp-em">🎂</div><div class="vp-tt" id="vp-tt">Happy Birthday, Chiamaka!</div><div class="vp-st">From Emeka, Adaeze, Chukwuemeka + 12 more</div><button class="vp-pb" id="vpb" style="display:none" onclick="notify('▶ Video preview playing — 2:34','info')">▶</button></div></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span style="background:var(--blue-lt);border:1.5px solid rgba(26,79,232,.18);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;color:var(--blue)">🎵 Birthday Instrumental</span>
+              <span style="background:var(--amber-md);border:1.5px solid rgba(202,138,4,.18);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;color:var(--gold)">🌅 Warm & Heartfelt</span>
+              <span style="background:var(--bg2);border:1.5px solid var(--border);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;color:var(--ink3)" id="dc2">⏱ 0:00</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:10px">AI Compilation Steps</div>
+            <div class="cs-list">
+              <div class="cs-item" id="cs1"><div class="cs-ic" style="background:var(--blue-lt)">🔍</div><div style="flex:1"><div style="font-weight:700">Analysing 15 clips</div><div class="cs-pb"><div class="cs-pf" id="cp1"></div></div></div></div>
+              <div class="cs-item" id="cs2"><div class="cs-ic" style="background:var(--rose-lt)">✂️</div><div style="flex:1"><div style="font-weight:700">Trimming & sequencing</div><div class="cs-pb"><div class="cs-pf" id="cp2"></div></div></div></div>
+              <div class="cs-item" id="cs3"><div class="cs-ic" style="background:var(--gold-lt)">🎵</div><div style="flex:1"><div style="font-weight:700">Adding music & transitions</div><div class="cs-pb"><div class="cs-pf" id="cp3"></div></div></div></div>
+              <div class="cs-item" id="cs4"><div class="cs-ic" style="background:var(--green-lt)">✨</div><div style="flex:1"><div style="font-weight:700">Text overlays & effects</div><div class="cs-pb"><div class="cs-pf" id="cp4"></div></div></div></div>
+              <div class="cs-item" id="cs5"><div class="cs-ic" style="background:var(--bg2)">📤</div><div style="flex:1"><div style="font-weight:700">Export 1080p HD · Upload</div><div class="cs-pb"><div class="cs-pf" id="cp5"></div></div></div></div>
+            </div>
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:8px">Upload to Platforms</div>
+            <div class="ug">
+              <div class="up" id="uyt"><div class="up-ic">📺</div><div style="font-weight:800;font-size:12px">YouTube</div><div class="up-pb"><div class="up-pf" id="uytp" style="background:#ff0000"></div></div></div>
+              <div class="up" id="uig"><div class="up-ic">📸</div><div style="font-weight:800;font-size:12px">Instagram</div><div class="up-pb"><div class="up-pf" id="uigp" style="background:linear-gradient(90deg,#f09433,#dc2743)"></div></div></div>
+              <div class="up" id="uwa"><div class="up-ic">💬</div><div style="font-weight:800;font-size:12px">WhatsApp</div><div class="up-pb"><div class="up-pf" id="uwap" style="background:#25D366"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <div class="sc-card" id="scene5">
+      <div class="sc-hdr"><div class="sc-hdr-l"><div class="sc-icon" style="background:var(--green-lt)">🚀</div><div><div class="sc-title">SURPRISE DELIVERY</div><div class="sc-desc" id="sc5d">Auto-delivered to Chiamaka on her birthday at 9:00 AM</div></div></div><div class="status-chip cw" id="sc5s">⏳ Waiting</div></div>
+      <div class="sc-body">
+        <div class="df">
+          <div class="ds"><div class="di" id="di1">📅</div><div class="dl">Event Day<br>Triggered</div></div>
+          <div class="dln" id="dl1"></div>
+          <div class="ds"><div class="di" id="di2">🎬</div><div class="dl">Video<br>Retrieved</div></div>
+          <div class="dln" id="dl2"></div>
+          <div class="ds"><div class="di" id="di3">💌</div><div class="dl">Personalised<br>Message</div></div>
+          <div class="dln" id="dl3"></div>
+          <div class="ds"><div class="di" id="di4">📱</div><div class="dl">Delivered<br>to <span id="del-step-name">Celebrant</span></div></div>
+          <div class="dln" id="dl4"></div>
+          <div class="ds"><div class="di" id="di5">⭐</div><div class="dl">Reaction<br>Collected</div></div>
+        </div>
+        <div class="dc" id="dcard" style="opacity:.3">
+          <div class="da">C</div>
+          <div><div class="dn" id="del-name">Chiamaka Okafor</div><div class="dsb" id="dcsd">Birthday · Finance Dept</div>
+            <div style="margin-top:6px;display:flex;gap:5px;flex-wrap:wrap">
+              <span class="chip cgray" id="dc1">🎬 Video pending</span>
+              <span class="chip cgray" id="dc2c">💬 WhatsApp pending</span>
+              <span class="chip cgray" id="dc3">📺 YouTube pending</span>
+            </div>
+          </div>
+          <div class="de"><div class="de-n" id="den">—</div><div class="de-l">Delivery Status</div></div>
+        </div>
+        <div id="dmsg" style="display:none;background:linear-gradient(135deg,var(--green-lt),var(--blue-lt));border:1.5px solid rgba(15,122,82,.2);border-radius:var(--r);padding:15px">
+          <div style="font-size:12.5px;font-weight:700;color:var(--green);margin-bottom:7px">🤖 Auto-Delivery Message — Sent at 9:00 AM</div>
+          <div style="background:var(--white);border-radius:9px;padding:12px;font-size:13px;line-height:1.7;color:var(--ink2);border:1px solid var(--border)">"🎉 <b>Happy Birthday, Chiamaka!</b><br><br>Your team put together something special for you! 🎬<br><span style="color:var(--blue);text-decoration:underline" id="vlink">youtube.com/watch?v=dakiya-chiamaka-2026</span><br><br>With love from Emeka, Adaeze, Chukwuemeka &amp; 12 others! 🎂🎊"</div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip cg">✅ WhatsApp Delivered</span><span class="chip cb2">✅ Email Delivered</span><span class="chip cgold">⭐ Rating: 5.0 / 5</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══ BIRTHDAY COUNTDOWN SYSTEM (REAL 2026 DATES) ═══ */
+const TEAM = [
+  {name:'Emeka Nwosu',      dept:'Finance',   init:'E', col:'#1a4fe8', m:3,  d:10},
+  {name:'Adaeze Okonkwo',   dept:'Marketing', init:'A', col:'#be185d', m:3,  d:19},
+  {name:'Chukwuemeka Eze',  dept:'Tech',      init:'C', col:'#0f7a52', m:3,  d:26},
+  {name:'Ngozi Adeyemi',    dept:'HR',        init:'N', col:'#ca8a04', m:4,  d:4},
+  {name:'Babatunde Alabi',  dept:'Sales',     init:'B', col:'#d97706', m:4,  d:11},
+  {name:'Chidinma Okeke',   dept:'Design',    init:'C', col:'#7c3aed', m:4,  d:17},
+  {name:'Kelechi Eze',      dept:'Tech',      init:'K', col:'#0f7a52', m:4,  d:22},
+  {name:'Aisha Mohammed',   dept:'Legal',     init:'A', col:'#be185d', m:4,  d:29},
+  {name:'Tunde Fashola',    dept:'Finance',   init:'T', col:'#1a4fe8', m:5,  d:6},
+  {name:'Blessing Obi',     dept:'Ops',       init:'B', col:'#ca8a04', m:5,  d:14},
+];
+
+function daysUntil(m,d){
+  const now=new Date();now.setHours(0,0,0,0);
+  let b=new Date(now.getFullYear(),m-1,d);
+  if(b<now)b=new Date(now.getFullYear()+1,m-1,d);
+  return Math.round((b-now)/864e5);
+}
+function bdayDate(m,d){
+  const mns=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now=new Date();let yr=now.getFullYear();
+  let b=new Date(yr,m-1,d);if(b<now){yr++;b=new Date(yr,m-1,d);}
+  return `${mns[m-1]} ${d}, ${yr}`;
+}
+
+function buildBDays(){
+  const scroll=document.getElementById('bbs');
+  scroll.innerHTML='';
+  // Sort by days remaining and filter to those within 30 days
+  const sorted=TEAM.map(t=>({...t,days:daysUntil(t.m,t.d)})).sort((a,b)=>a.days-b.days);
+  // Show only birthdays within the next 30 days
+  const show=sorted.filter(t=>t.days<=30).slice(0,8);
+
+  show.forEach(t=>{
+    const isU=t.days<=7,isS=t.days>7 && t.days<=30;
+    const now=new Date();now.setHours(0,0,0,0);
+    let b=new Date(now.getFullYear(),t.m-1,t.d);
+    if(b<now)b=new Date(now.getFullYear()+1,t.m-1,t.d);
+    const dms=b-now;
+    const dd=Math.floor(dms/864e5),dh=Math.floor((dms%864e5)/36e5),dm=Math.floor((dms%36e5)/6e4);
+    const tagCls=isU?'t-urg':isS?'t-sn':'t-up';
+    const tagTx=isU?`🔥 ${t.days} days!`:isS?`⏳ ${t.days} days`:`📅 ${t.days} days`;
+    const btnCls=isU?'':'sn-btn';
+    const btnTx=isU?'🚀 Start Now!':isS?'🎉 Plan Surprise':'📋 Save for Later';
+
+    const c=document.createElement('div');
+    c.className=`bc ${isU?'urg':isS?'sn':''}`;
+    c.innerHTML=`<div class="bc-top"><div class="bc-av" style="background:${t.col}18;color:${t.col}">${t.init}</div><div><div class="bc-name">${t.name}</div><div class="bc-dept">${t.dept}</div></div></div><span class="bc-tag ${tagCls}">${tagTx}</span><div class="bc-date">📅 ${bdayDate(t.m,t.d)}</div><div class="bc-cd"><div class="bc-unit"><span class="bc-num">${String(dd).padStart(2,'0')}</span><div class="bc-lbl">Days</div></div><span class="bc-sep">:</span><div class="bc-unit"><span class="bc-num">${String(dh).padStart(2,'0')}</span><div class="bc-lbl">Hrs</div></div><span class="bc-sep">:</span><div class="bc-unit"><span class="bc-num">${String(dm).padStart(2,'0')}</span><div class="bc-lbl">Min</div></div></div><button class="bc-btn ${btnCls}" onclick="planFor('${t.name}','${bdayDate(t.m,t.d)}')">${btnTx}</button>`;
+    scroll.appendChild(c);
+  });
+}
+
+function planFor(name,date){
+  // Update global celebrant
+  CELEBRANT.name = name;
+  CELEBRANT.date = date;
+  CELEBRANT.first = name.split(' ')[0];
+  CELEBRANT.init = name.charAt(0).toUpperCase();
+  // Parse date string back to calculate real countdown
+  const parsed = new Date(date);
+  CELEBRANT.dateObj = isNaN(parsed) ? _DEF : parsed;
+  const shortOpts={day:'numeric',month:'short',year:'numeric'};
+  CELEBRANT.short = CELEBRANT.dateObj.toLocaleDateString('en-NG',shortOpts);
+  const dlObj = new Date(CELEBRANT.dateObj.getTime()-3*864e5);
+  CELEBRANT.dl = dlObj.toLocaleDateString('en-NG',{day:'numeric',month:'short'});
+
+  // Patch static elements in scenes
+  patchCelebrantUI();
+
+  notify(`🎉 Surprise planned for ${name}! Fill in details below.`,'success');
+  setTimeout(()=>{
+    document.getElementById('fn').value=name;
+    document.getElementById('fd').value=date;
+    document.getElementById('ft').value='Birthday 🎂';
+    ['fn','fd','ft'].forEach(id=>{const e=document.getElementById(id);e.classList.remove('typing');e.classList.add('done');});
+    document.getElementById('scene1').scrollIntoView({behavior:'smooth',block:'center'});
+  },500);
+}
+
+function patchCelebrantUI(){
+  const n=CELEBRANT.name, f=CELEBRANT.first, s=CELEBRANT.short, dl=CELEBRANT.dl, yr=CELEBRANT.dateObj.getFullYear(), i=CELEBRANT.init;
+  const $=id=>document.getElementById(id);
+  // Scene 5 header desc
+  const sc5d=$('sc5d');if(sc5d)sc5d.textContent=`Auto-delivered to ${f} on ${s} at 9:00 AM`;
+  // Delivery card
+  const dcsd=$('dcsd');if(dcsd)dcsd.textContent=`Birthday · ${s} · Finance Dept`;
+  const delName=$('del-name');if(delName)delName.textContent=n;
+  const delStep=$('del-step-name');if(delStep)delStep.textContent=f;
+  // Delivery avatar
+  const da=document.querySelector('.da');if(da)da.textContent=i;
+  // Video title
+  const vtt=$('vp-tt');if(vtt)vtt.textContent=`Happy Birthday, ${f}!`;
+  // Video link
+  const vl=$('vlink');if(vl)vl.textContent=`youtube.com/watch?v=dakiya-${f.toLowerCase()}-${yr}`;
+  // WhatsApp bubble
+  const wbb=$('wbb');if(wbb)wbb.innerHTML=`Hey <b>Emeka</b>! 👋<br><br>I'm organising a surprise <b>Birthday</b> for <b>${n}</b>! 🎂<br><br>Could you record a short wish? Takes just 2 minutes!<br><br>📅 Deadline: <b>${dl}</b><br>🎬 Your clip = part of the surprise video!<br><br><span style="color:#a8e6cf;text-decoration:underline">👉 Tap here →</span>`;
+  // Email
+  const esub=$('esub');if(esub)esub.textContent=`🎉 Help surprise ${f} for their Birthday!`;
+  const emf=$('emf');if(emf)emf.textContent=`${f}'s birthday on ${s}`;
+  const edl=$('edl');if(edl)edl.textContent=dl;
+  const wdl=$('wdl');if(wdl)wdl.textContent=dl;
+  // Completion overlay
+  const cosb=$('co-sb');if(cosb)cosb.innerHTML=`<b>${n}</b> just received their birthday surprise video from 15 teammates. The entire journey — planning to delivery — took just <strong style="color:var(--ink)">4 minutes</strong> in demo mode.`;
+  // Delivery message box
+  const dmsgBox=document.querySelector('#dmsg div[style*="background:var(--white)"]');
+  if(dmsgBox)dmsgBox.innerHTML=`"🎉 <b>Happy Birthday, ${f}!</b><br><br>Your team put together something special for you! 🎬<br><span style="color:var(--blue);text-decoration:underline">youtube.com/watch?v=dakiya-${f.toLowerCase()}-${yr}</span><br><br>With love from Emeka, Adaeze, Chukwuemeka &amp; 12 others! 🎂🎊"`;
+}
+
+setInterval(buildBDays,60000);
+
+/* ═══ DEMO ENGINE (DYNAMIC CELEBRANT) ═══ */
+let demoRunning=false,spd=1,abort=false,wCnt=0,iCnt=0;
+
+function getDefaultDate(){
+  const now=new Date();let yr=now.getFullYear();
+  let d=new Date(yr,2,15);if(d<=now)d=new Date(yr+1,2,15);return d;
+}
+const _DEF=getDefaultDate();
+const CELEBRANT={
+  name:'Chiamaka Okafor',first:'Chiamaka',init:'C',dateObj:_DEF,
+  date:_DEF.toLocaleDateString('en-NG',{day:'numeric',month:'long',year:'numeric'}),
+  short:_DEF.toLocaleDateString('en-NG',{day:'numeric',month:'short',year:'numeric'}),
+  dl:new Date(_DEF.getTime()-3*864e5).toLocaleDateString('en-NG',{day:'numeric',month:'short'}),
+};
+patchCelebrantUI();
+
+const GUESTS=[
+  {name:'Emeka Nwosu',init:'E',col:'#1a4fe8',ch:'WhatsApp'},{name:'Adaeze Obi',init:'A',col:'#be185d',ch:'Email'},
+  {name:'Chukwuemeka Eze',init:'C',col:'#0f7a52',ch:'WhatsApp'},{name:'Ngozi Adeyemi',init:'N',col:'#ca8a04',ch:'WhatsApp'},
+  {name:'Babatunde Alabi',init:'B',col:'#d97706',ch:'Email'},{name:'Chidinma Okeke',init:'C',col:'#7c3aed',ch:'WhatsApp'},
+  {name:'Kelechi Ugwu',init:'K',col:'#0f7a52',ch:'Email'},{name:'Aisha Mohammed',init:'A',col:'#be185d',ch:'WhatsApp'},
+  {name:'Tunde Fashola',init:'T',col:'#1a4fe8',ch:'Email'},{name:'Blessing Obi',init:'B',col:'#ca8a04',ch:'WhatsApp'},
+  {name:'Obinna Nwankwo',init:'O',col:'#7c3aed',ch:'Email'},{name:'Ifeoma Okafor',init:'I',col:'#d97706',ch:'WhatsApp'},
+  {name:'Chibuzor Nnamdi',init:'C',col:'#0f7a52',ch:'Email'},{name:'Chinenye Eze',init:'C',col:'#be185d',ch:'WhatsApp'},
+  {name:'Oluchi Okonkwo',init:'O',col:'#1a4fe8',ch:'Email'},
+];
+const WT=['🎥 0:32','🎙️ 0:18','✍️ Text','🎥 0:45','🎙️ 0:22','✍️ Text','🎥 0:38','🎙️ 0:15','✍️ Text','🎥 0:28','✍️ Text','🎥 0:52','🎙️ 0:30','✍️ Text','🎥 0:41'];
+
+const W=ms=>new Promise(r=>setTimeout(r,ms*spd));
+
+function setSpeed(m){spd=m;document.querySelectorAll('.sc-btn').forEach(b=>b.classList.toggle('active',['0.5×','1×','2×','4×'][{2:0,1:1,.5:2,.25:3}[m]]===b.textContent));}
+
+function notify(msg,type='info',dur=4200){
+  const ns=document.getElementById('ns');
+  const n=document.createElement('div');n.className=`nt ${type}`;
+  const ic={success:'✅',info:'ℹ️',warning:'⚠️'};
+  n.innerHTML=`<div class="ni">${ic[type]||'ℹ️'}</div><div class="nt-b"><div class="nt-m">${msg}</div><div class="nt-t">${new Date().toLocaleTimeString()}</div></div>`;
+  ns.appendChild(n);
+  if(ns.children.length>4)ns.removeChild(ns.firstChild);
+  setTimeout(()=>{n.style.opacity='0';n.style.transform='translateX(110%)';n.style.transition='all .35s';setTimeout(()=>n.remove(),400);},dur);
+}
+
+function sss(id,t){const e=document.getElementById(`sc${id}s`);const lb={waiting:'⏳ Waiting',active:'⚡ Running',done:'✅ Complete'};const cs={waiting:'cw',active:'ca',done:'cd2'};e.className=`status-chip ${cs[t]}`;e.textContent=lb[t];}
+function stl(id,st){const n=document.getElementById(`tln${id}`),l=document.getElementById(`tls${id}`),li=document.getElementById(`tll${id}`);n.className=`tl-num ${st}`;if(st==='done'){n.textContent='✓';l.className='tl-step-label done';}else if(st==='active'){n.textContent=id;l.className='tl-step-label active';}else{n.textContent=id;l.className='tl-step-label';}if(li&&st==='done')li.classList.add('done');}
+function sp(p){document.getElementById('opf').style.width=p+'%';document.getElementById('opp').textContent=Math.round(p)+'%';}
+
+async function tyIn(id,txt,s=68){const e=document.getElementById(id);e.value='';e.classList.add('typing');for(let c of txt){if(abort)break;e.value+=c;await W(s);}e.classList.remove('typing');e.classList.add('done');}
+
+/* SCENE 1 */
+async function runS1(){
+  const sc=document.getElementById('scene1');sc.classList.add('active');
+  sss(1,'active');stl(1,'active');sp(5);
+  notify(`🎉 Starting Surprise Planner for ${CELEBRANT.name}...`,'info');await W(600);
+  await tyIn('fn',CELEBRANT.name,72);await W(280);
+  await tyIn('ft','Birthday 🎂',55);await W(280);
+  await tyIn('fd',CELEBRANT.date,42);await W(500);
+
+  const dms=CELEBRANT.dateObj-new Date(),dd=Math.floor(dms/864e5),dh=Math.floor((dms%864e5)/36e5),dm=Math.floor((dms%36e5)/6e4);
+  document.getElementById('cdd').classList.add('show');
+  document.getElementById('cdd_d').textContent=String(dd).padStart(2,'0');
+  document.getElementById('cdd_h').textContent=String(dh).padStart(2,'0');
+  document.getElementById('cdd_m').textContent=String(dm).padStart(2,'0');
+  notify(`⏳ ${dd} days, ${dh}h ${dm}m until ${CELEBRANT.first}'s birthday!`,'success');await W(900);
+  sp(12);notify('📋 Setting up guest list...','info');await W(400);
+
+  document.getElementById('gla').style.display='block';
+  const gr=document.getElementById('gr');gr.innerHTML='';
+  for(let i=0;i<Math.min(5,GUESTS.length);i++){
+    const g=GUESTS[i];const row=document.createElement('div');row.className='g-row';
+    row.innerHTML=`<div class="g-av" style="background:${g.col}18;color:${g.col}">${g.init}</div><div class="g-name">${g.name}</div><div class="g-ch">${g.ch}</div><span class="g-st gs-i">Invited</span>`;
+    gr.appendChild(row);await W(110);row.classList.add('ap');
+  }
+  const mr=document.createElement('div');mr.className='g-row ap';
+  mr.innerHTML=`<div style="width:28px;height:28px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:var(--ink3)">+10</div><div class="g-name" style="color:var(--ink3)">and 10 more teammates...</div><span class="g-st gs-i">Invited</span>`;
+  gr.appendChild(mr);
+  await W(500);document.getElementById('s1l').style.display='block';
+  notify(`🚀 Surprise event for ${CELEBRANT.name} launched! AI automation armed.`,'success');
+  sp(20);sss(1,'done');stl(1,'done');sc.classList.remove('active');sc.classList.add('done');await W(700);
+}
+
+/* SCENE 2 */
+async function runS2(){
+  const sc=document.getElementById('scene2');sc.classList.add('active');sc.scrollIntoView({behavior:'smooth',block:'center'});
+  sss(2,'active');stl(2,'active');sp(25);
+  notify('📨 AI personalising invites for 15 contributors...','info');await W(700);
+  document.getElementById('wt2').classList.add('show');await W(1100);
+  document.getElementById('wt2').classList.remove('show');document.getElementById('wbb').style.display='block';
+  // Refresh WhatsApp bubble with current celebrant
+  document.getElementById('wbb').innerHTML=`Hey <b>Emeka</b>! 👋<br><br>I'm organising a surprise <b>Birthday</b> for <b>${CELEBRANT.name}</b>! 🎂<br><br>Could you record a short wish? Takes just 2 minutes!<br><br>📅 Deadline: <b>${CELEBRANT.dl}</b><br>🎬 Your clip = part of the surprise video!<br><br><span style="color:#a8e6cf;text-decoration:underline">👉 Tap here →</span>`;
+  notify('💬 WhatsApp template personalised!','success');await W(400);
+  document.getElementById('esub').style.opacity='1';document.getElementById('ebody').style.opacity='1';
+  document.getElementById('emf').textContent=`${CELEBRANT.first}'s birthday on ${CELEBRANT.short}`;
+  document.getElementById('esub').textContent=`🎉 Help surprise ${CELEBRANT.first} for her Birthday!`;
+  document.getElementById('edl').textContent=CELEBRANT.dl;
+  notify('📧 Email template ready!','success');await W(700);
+
+  const tb=document.getElementById('tb');tb.innerHTML='';iCnt=0;
+  for(let i=0;i<GUESTS.length;i++){
+    const g=GUESTS[i];iCnt++;
+    document.getElementById('isSn').textContent=iCnt;document.getElementById('mI').textContent=iCnt;
+    document.getElementById('isSent').classList.add('hl');
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span style="display:inline-flex;align-items:center;gap:7px"><span style="width:23px;height:23px;border-radius:50%;background:${g.col}18;color:${g.col};display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800">${g.init}</span>${g.name}</span></td><td><span class="chip ${g.ch==='WhatsApp'?'cg':'cb2'}">${g.ch==='WhatsApp'?'💬':'📧'} ${g.ch}</span></td><td><span class="chip cg">✅ Sent</span></td><td><span class="chip cgray" id="op${i}">⏳</span></td><td><span class="chip cgray" id="wp${i}">⏳</span></td>`;
+    tb.appendChild(tr);await W(i<5?165:72);
+  }
+  notify(`📨 ${iCnt} invites sent for ${CELEBRANT.first}'s surprise!`,'success');await W(500);
+  let op=0;
+  for(let i=0;i<GUESTS.length;i++){const e=document.getElementById(`op${i}`);if(e){e.className='chip cb2';e.textContent='👁 Opened';op++;document.getElementById('isOn').textContent=op;}await W(85);}
+  const rt=Math.round(op/GUESTS.length*100);document.getElementById('isRn').textContent=rt+'%';document.getElementById('mR').textContent=rt+'%';
+  notify(`👁 ${op}/15 contributors opened invite!`,'success');
+  sp(40);sss(2,'done');stl(2,'done');sc.classList.remove('active');sc.classList.add('done');await W(700);
+}
+
+/* SCENE 3 */
+async function runS3(){
+  const sc=document.getElementById('scene3');sc.classList.add('active');sc.scrollIntoView({behavior:'smooth',block:'center'});
+  sss(3,'active');stl(3,'active');sp(45);wCnt=0;
+  notify('💌 Wish collection open! Contributions coming in...','info');await W(500);
+  for(let w of['wtv','wta','wtt']){document.getElementById(w).classList.add('sel');await W(260);document.getElementById(w).classList.remove('sel');}
+  document.getElementById('wtv').classList.add('sel');
+  const rb=document.getElementById('rbd'),rs=document.getElementById('rst'),rt=document.getElementById('rtm');
+  rb.classList.add('rec');rb.textContent='⏹️';rs.textContent='🔴 Recording... speak your wish!';rt.style.display='block';
+  let s=0;const ri=setInterval(()=>{s++;rt.textContent=`0:${String(s).padStart(2,'0')}`;},1000*spd);
+  await W(3200);clearInterval(ri);rb.classList.remove('rec');rb.textContent='✅';rs.textContent='✅ Recording saved!';
+  notify('🎥 Demo recording complete — 0:28','success');await W(500);
+  const wf=document.getElementById('wf');wf.innerHTML='';
+  const wms=[`Happy Birthday ${CELEBRANT.first}! Your dedication inspires us all 🎂`,"Wishing you all the blessings this year!","So proud to have you on this team!","May all your dreams come true! You deserve it!","You make every day brighter for all of us!"];
+  for(let i=0;i<GUESTS.length;i++){
+    const g=GUESTS[i];wCnt++;const wt=WT[i];
+    const we=document.getElementById(`wp${i}`);if(we){const iv=wt.includes('🎥'),ia=wt.includes('🎙️');we.className=`chip ${iv?'cb2':ia?'cgold':'cg'}`;we.textContent=wt;}
+    const p=Math.round(wCnt/15*100),c=289,o=c-(p/100)*c;
+    document.getElementById('wrf').style.strokeDashoffset=o;
+    document.getElementById('wpc').textContent=p+'%';document.getElementById('wct').textContent=`${wCnt}/15`;document.getElementById('mW').textContent=`${wCnt}/15`;
+    const item=document.createElement('div');item.className='wi';
+    const iv=wt.includes('🎥'),ia=wt.includes('🎙️'),msg=wms[i%wms.length];
+    item.innerHTML=`<div class="wi-av" style="background:${g.col}18;color:${g.col}">${g.init}</div><div style="flex:1"><div class="wi-nm">${g.name} <span class="chip ${iv?'cb2':ia?'cgold':'cg'}" style="font-size:9.5px">${wt}</span></div><div class="wi-tm">Just now</div>${!iv&&!ia?`<div class="wi-ct">"${msg}"</div>`:`<div class="wi-ct" style="color:var(--ink3);font-style:italic">Audio/video clip received ✓</div>`}</div>`;
+    wf.insertBefore(item,wf.firstChild);if(wf.children.length>5)wf.lastChild.remove();
+    await W(10);item.classList.add('ap');
+    if(wCnt===8)notify('🎉 8/15 wishes — over halfway!','success');
+    if(wCnt===15)notify('🎊 All 15 wishes collected! Target reached!','success');
+    await W(i<5?320:175);
+  }
+  document.getElementById('mR').textContent='100%';
+  sp(65);document.getElementById('mV').textContent='Compiling...';
+  sss(3,'done');stl(3,'done');sc.classList.remove('active');sc.classList.add('done');await W(700);
+}
+
+/* SCENE 4 */
+async function runS4(){
+  const sc=document.getElementById('scene4');sc.classList.add('active');sc.scrollIntoView({behavior:'smooth',block:'center'});
+  sss(4,'active');stl(4,'active');sp(68);
+  notify('🤖 AI Video compilation starting...','info');await W(500);
+  const steps=['cs1','cs2','cs3','cs4','cs5'],fills=['cp1','cp2','cp3','cp4','cp5'];
+  const msgs=['🔍 Analysing 15 clips...','✂️ Sequencing & trimming...','🎵 Adding music & transitions...','✨ Text overlays & effects...','📤 Exporting 1080p HD...'];
+  const dm=['Analysis complete!','Sequencing done!','Music added!','Effects applied!','Export complete!'];
+  let dur=0;
+  for(let i=0;i<steps.length;i++){
+    const cs=document.getElementById(steps[i]);cs.classList.add('active');notify(msgs[i],'info');
+    const f=document.getElementById(fills[i]);f.style.width='0%';await W(80);
+    f.style.transition=`width ${1.1*spd}s ease`;f.style.width='100%';await W(1300);
+    cs.classList.remove('active');cs.classList.add('done');cs.querySelector('.cs-ic').style.background='var(--green-lt)';
+    notify('✅ '+dm[i],'success');dur+=30;const m=Math.floor(dur/60),s=dur%60;
+    document.getElementById('dc2').textContent=`⏱ ${m}:${String(s).padStart(2,'0')}`;await W(240);
+  }
+  document.getElementById('dc2').textContent='⏱ 2:34';document.getElementById('vpb').style.display='flex';document.getElementById('mV').textContent='✅ Ready';
+  // Update video title with celebrant name
+  const vtEl=document.querySelector('.vp-tt');if(vtEl)vtEl.textContent=`Happy Birthday, ${CELEBRANT.first}!`;
+  notify('🎬 Video compiled! 2:34 · 1080p HD','success');sp(78);await W(500);
+  notify('📤 Uploading to platforms...','info');
+  const pls=[{id:'uyt',fid:'uytp',nm:'YouTube'},{id:'uig',fid:'uigp',nm:'Instagram'},{id:'uwa',fid:'uwap',nm:'WhatsApp'}];
+  for(const p of pls){
+    const c=document.getElementById(p.id);c.classList.add('upl');
+    const f=document.getElementById(p.fid);f.style.width='0%';await W(80);
+    f.style.transition=`width ${1.4*spd}s ease`;f.style.width='100%';await W(1600);
+    c.classList.remove('upl');c.classList.add('udn');notify(`✅ Uploaded to ${p.nm}!`,'success');await W(240);
+  }
+  sp(90);sss(4,'done');stl(4,'done');sc.classList.remove('active');sc.classList.add('done');await W(700);
+}
+
+/* SCENE 5 */
+async function runS5(){
+  const sc=document.getElementById('scene5');sc.classList.add('active');sc.scrollIntoView({behavior:'smooth',block:'center'});
+  sss(5,'active');stl(5,'active');sp(93);
+  notify(`🚀 Auto-delivery triggered — it's ${CELEBRANT.short}, 9:00 AM!`,'info');await W(700);
+  document.getElementById('dcard').style.opacity='1';document.getElementById('dcard').style.transition='opacity .5s';
+  // Refresh delivery card name live
+  const dnEl=document.getElementById('del-name');if(dnEl)dnEl.textContent=CELEBRANT.name;
+  const daEl=document.querySelector('.da');if(daEl)daEl.textContent=CELEBRANT.init;
+  const delStepEl=document.getElementById('del-step-name');if(delStepEl)delStepEl.textContent=CELEBRANT.first;
+  const icons=['di1','di2','di3','di4','di5'],lines=['dl1','dl2','dl3','dl4'];
+  const nm=[`📅 ${CELEBRANT.short} triggered!`,'🎬 Video retrieved!','✍️ Message composed!',`📱 Delivered to ${CELEBRANT.first}!`,`🌟 ${CELEBRANT.first} rated it 5 stars!`];
+  const el=['Triggering...','Retrieving...','Composing...','Delivering!','Delivered! ⭐'];
+  for(let i=0;i<icons.length;i++){
+    document.getElementById(icons[i]).classList.add('active');document.getElementById('den').textContent=el[i];
+    notify(nm[i],i<3?'info':'success');
+    if(i===2){document.getElementById('dc1').className='chip cb2';document.getElementById('dc1').textContent='🎬 Ready';}
+    if(i===3){document.getElementById('dc2c').className='chip cg';document.getElementById('dc2c').textContent='💬 Sent!';document.getElementById('dc3').className='chip cb2';document.getElementById('dc3').textContent='📺 Uploaded';
+      // Update delivery chip to show celebrant name
+      document.getElementById('dc1').textContent=`🎬 ${CELEBRANT.first}'s video ready`;
+    }
+    await W(880);document.getElementById(icons[i]).classList.remove('active');document.getElementById(icons[i]).classList.add('done');
+    if(lines[i])document.getElementById(lines[i]).classList.add('done');
+  }
+  await W(400);
+  // Update delivery message body with correct name
+  const dmsgEl=document.getElementById('dmsg');
+  if(dmsgEl){
+    const yr=CELEBRANT.dateObj.getFullYear();
+    const bodyDiv=dmsgEl.querySelector('div[style*="background:var(--white)"]');
+    if(bodyDiv)bodyDiv.innerHTML=`"🎉 <b>Happy Birthday, ${CELEBRANT.first}!</b><br><br>Your team put together something special for you! 🎬<br><span style="color:var(--blue);text-decoration:underline">youtube.com/watch?v=dakiya-${CELEBRANT.first.toLowerCase()}-${yr}</span><br><br>With love from Emeka, Adaeze, Chukwuemeka &amp; 12 others! 🎂🎊"`;
+  }
+  document.getElementById('dmsg').style.display='block';
+  notify(`🎊 COMPLETE! ${CELEBRANT.name} received their birthday surprise!`,'success',6000);
+  sp(100);sss(5,'done');stl(5,'done');sc.classList.remove('active');sc.classList.add('done');
+  // Update completion overlay with correct name
+  const cosb=document.getElementById('co-sb');
+  if(cosb)cosb.innerHTML=`<b>${CELEBRANT.name}</b> just received their birthday surprise video from 15 teammates. The entire journey — planning to delivery — took just <strong style="color:var(--ink)">4 minutes</strong> in demo mode.`;
+  await W(1400);launchConfetti();await W(1800);document.getElementById('co').classList.add('show');
+}
+
+async function startDemo(){
+  if(demoRunning)return;abort=false;demoRunning=true;
+  document.getElementById('mpb').textContent='⏸ Running...';document.getElementById('hpb').textContent='⏸ Running...';
+  await runS1();if(abort){demoRunning=false;return;}
+  await runS2();if(abort){demoRunning=false;return;}
+  await runS3();if(abort){demoRunning=false;return;}
+  await runS4();if(abort){demoRunning=false;return;}
+  await runS5();
+  demoRunning=false;document.getElementById('mpb').textContent='▶ Start Full Demo';document.getElementById('hpb').textContent='▶ Start Full Auto Demo';
+}
+
+function jumpToScene(n){
+  abort=true;demoRunning=false;
+  setTimeout(()=>{abort=false;const r=[null,runS1,runS2,runS3,runS4,runS5];document.getElementById('mpb').textContent='⏸ Running...';if(r[n])r[n]().then(()=>{demoRunning=false;document.getElementById('mpb').textContent='▶ Start Full Demo';});},200);
+}
+
+function restartDemo(){
+  abort=true;demoRunning=false;document.getElementById('co').classList.remove('show');
+  setTimeout(()=>{
+    abort=false;wCnt=0;iCnt=0;
+    for(let i=1;i<=5;i++){document.getElementById(`scene${i}`).className='sc-card';sss(i,'waiting');const n=document.getElementById(`tln${i}`);if(n){n.className='tl-num';n.textContent=i;}const l=document.getElementById(`tls${i}`);if(l)l.className='tl-step-label';const li=document.getElementById(`tll${i}`);if(li)li.classList.remove('done');}
+    ['fn','fd','ft'].forEach(id=>{const e=document.getElementById(id);if(e){e.value='';e.className='fi';}});
+    document.getElementById('cdd').classList.remove('show');document.getElementById('gla').style.display='none';document.getElementById('s1l').style.display='none';
+    document.getElementById('wt2').classList.remove('show');document.getElementById('wbb').style.display='none';
+    document.getElementById('esub').style.opacity='.3';document.getElementById('ebody').style.opacity='.3';
+    document.getElementById('isSn').textContent='0';document.getElementById('isOn').textContent='0';document.getElementById('isRn').textContent='0%';
+    document.getElementById('tb').innerHTML='';document.getElementById('mI').textContent='0';document.getElementById('mR').textContent='—';
+    document.getElementById('wf').innerHTML='';document.getElementById('wrf').style.strokeDashoffset='289';
+    document.getElementById('wpc').textContent='0%';document.getElementById('wct').textContent='0/15';document.getElementById('mW').textContent='0/15';
+    document.getElementById('rbd').className='rb';document.getElementById('rbd').textContent='🎥';
+    document.getElementById('rst').textContent='Press to record your wish';document.getElementById('rtm').style.display='none';
+    ['wtv','wta','wtt'].forEach(id=>document.getElementById(id).classList.remove('sel'));
+    ['cs1','cs2','cs3','cs4','cs5'].forEach(id=>{const e=document.getElementById(id);e.className='cs-item';e.querySelector('.cs-ic').style.background='';});
+    ['cp1','cp2','cp3','cp4','cp5'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.transition='none';e.style.width='0%';}});
+    ['uyt','uig','uwa'].forEach(id=>document.getElementById(id).className='up');
+    ['uytp','uigp','uwap'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.transition='none';e.style.width='0%';}});
+    document.getElementById('vpb').style.display='none';document.getElementById('dc2').textContent='⏱ 0:00';document.getElementById('mV').textContent='Pending';
+    ['di1','di2','di3','di4','di5'].forEach(id=>document.getElementById(id).className='di');
+    ['dl1','dl2','dl3','dl4'].forEach(id=>document.getElementById(id).classList.remove('done'));
+    document.getElementById('dcard').style.opacity='.3';document.getElementById('dmsg').style.display='none';
+    document.getElementById('dc1').className='chip cgray';document.getElementById('dc1').textContent='🎬 Video pending';
+    document.getElementById('dc2c').className='chip cgray';document.getElementById('dc2c').textContent='💬 WhatsApp pending';
+    document.getElementById('dc3').className='chip cgray';document.getElementById('dc3').textContent='📺 YouTube pending';
+    document.getElementById('den').textContent='—';
+    sp(0);document.getElementById('mpb').textContent='▶ Start Full Demo';document.getElementById('hpb').textContent='▶ Start Full Auto Demo';
+    notify('↺ Demo reset — ready to run again!','info');
+  },300);
+}
+
+function launchConfetti(){
+  const cs=['#d97706','#be185d','#0f7a52','#ca8a04','#1a4fe8','#7c3aed'];
+  for(let i=0;i<80;i++){setTimeout(()=>{const p=document.createElement('div');p.className='cp2';p.style.left=Math.random()*100+'vw';p.style.background=cs[Math.floor(Math.random()*cs.length)];p.style.width=(Math.random()*8+5)+'px';p.style.height=(Math.random()*8+5)+'px';p.style.borderRadius=Math.random()>.5?'50%':'2px';const d=Math.random()*2+2.2;p.style.animationDuration=d+'s';p.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),(d+.5)*1000);},i*28);}
+}
+
+buildBDays();
+</script>
+</body>
+</html>

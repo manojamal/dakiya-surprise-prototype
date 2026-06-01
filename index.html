@@ -636,9 +636,9 @@ textarea.fi{resize:vertical;min-height:80px}
         <button class="btn btn-o btn-full mt8" onclick="doLogin()">Sign In →</button>
         <div class="divider">QUICK DEMO</div>
         <div class="g3" style="gap:6px">
-          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('silver')">🥈 Silver</button>
-          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('gold')">🥇 Gold</button>
-          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('diamond')">💎 Diamond</button>
+          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('adaeze')">👩 Adaeze</button>
+          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('silver')">🆓 Freemium</button>
+          <button class="btn btn-ghost btn-sm btn-full" onclick="qLogin('diamond')">💎 Elite Demo</button>
         </div>
       </div>
       <div class="a-form" id="a-reg">
@@ -649,10 +649,11 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="fg"><label class="fl">Email</label><input class="fi" id="r-em" placeholder="you@email.com"></div>
         <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="r-pw" placeholder="Min 8 chars"></div>
         <div class="fg"><label class="fl">Choose Plan</label>
-          <div class="plan-g" id="reg-plan-g">
-            <div class="plan-c" onclick="selPlan('silver',this)"><div style="font-size:18px">🥈</div><div style="font-weight:700;font-size:11px;margin-top:3px">Silver</div><div class="txt-xs txt-m mono">₦1,499</div></div>
-            <div class="plan-c sel" onclick="selPlan('gold',this)"><div style="font-size:18px">🥇</div><div style="font-weight:700;font-size:11px;margin-top:3px">Gold</div><div class="txt-xs txt-m mono">₦2,999</div></div>
-            <div class="plan-c" onclick="selPlan('diamond',this)"><div style="font-size:18px">💎</div><div style="font-weight:700;font-size:11px;margin-top:3px">Diamond</div><div class="txt-xs txt-m mono">₦4,999</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px" id="reg-plan-g">
+            <div class="plan-c" onclick="selPlan('freemium',this)"><div style="font-size:18px">🆓</div><div style="font-weight:700;font-size:11px;margin-top:3px">Freemium</div><div class="txt-xs txt-m mono">Free</div></div>
+            <div class="plan-c" onclick="selPlan('standard',this)"><div style="font-size:18px">⭐</div><div style="font-weight:700;font-size:11px;margin-top:3px">Standard</div><div class="txt-xs txt-m mono">₦2,500</div></div>
+            <div class="plan-c sel" onclick="selPlan('gold',this)"><div style="font-size:18px">🥇</div><div style="font-weight:700;font-size:11px;margin-top:3px">Gold</div><div class="txt-xs txt-m mono">₦4,999</div></div>
+            <div class="plan-c" onclick="selPlan('elite',this)"><div style="font-size:18px">💎</div><div style="font-weight:700;font-size:11px;margin-top:3px">Elite</div><div class="txt-xs txt-m mono">₦9,999</div></div>
           </div>
         </div>
         <button class="btn btn-o btn-full" onclick="doReg()">Create Account →</button>
@@ -683,6 +684,10 @@ textarea.fi{resize:vertical;min-height:80px}
       <div class="nav-sec">Delivery</div>
       <div class="ni" onclick="nav('delivery')"><span class="ni-icon">🚀</span>Delivery Hub</div>
       <div class="ni" onclick="nav('tracker')"><span class="ni-icon">📊</span>Activity Tracker</div>
+      <div class="ni" onclick="nav('reactions')"><span class="ni-icon">😍</span>Reactions<span class="ni-badge" id="react-badge">0</span></div>
+      <div class="nav-sec">Tools</div>
+      <div class="ni" onclick="nav('tts')"><span class="ni-icon">🔊</span>Text to Speech</div>
+      <div class="ni" onclick="nav('themes')"><span class="ni-icon">🎨</span>Themes & Styles</div>
       <div class="nav-sec">Account</div>
       <div class="ni" onclick="nav('profile')"><span class="ni-icon">👤</span>Profile</div>
       <div class="ni" onclick="nav('plans')"><span class="ni-icon">⭐</span>Plans</div>
@@ -704,7 +709,7 @@ textarea.fi{resize:vertical;min-height:80px}
         <div class="stat"><div class="stat-lbl">Active Events</div><div class="stat-n" id="st-ev">3</div><div class="stat-ch">↑ 1 new</div><div class="stat-bg">🎉</div></div>
         <div class="stat"><div class="stat-lbl">Media Items</div><div class="stat-n" id="st-med">0</div><div class="stat-ch">Library</div><div class="stat-bg">🗂️</div></div>
         <div class="stat"><div class="stat-lbl">Links Sent</div><div class="stat-n" id="st-li">14</div><div class="stat-ch">↑ 3 today</div><div class="stat-bg">🔗</div></div>
-        <div class="stat"><div class="stat-lbl">Avg Rating</div><div class="stat-n" id="st-ra">4.9⭐</div><div class="stat-ch">Top 5%</div><div class="stat-bg">🏆</div></div>
+        <div class="stat"><div class="stat-lbl">Reward Pts</div><div class="stat-n" id="st-ra">0</div><div class="stat-ch">Points</div><div class="stat-bg">🎁</div></div>
       </div>
       <div class="card mb20">
         <div class="fl-bc mb14"><div style="font-weight:800;font-size:15px">🔄 Surprise Pipeline — Oluwaseun's Birthday</div><span class="badge b-o">ACTIVE</span></div>
@@ -831,6 +836,11 @@ textarea.fi{resize:vertical;min-height:80px}
           </div>
         </div>
         <div>
+          <div class="card mb14" id="plan-usage-card" style="background:linear-gradient(135deg,var(--oran-l),var(--c1));border-color:var(--oran-m)">
+            <div style="font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">📊 Your Usage This Month</div>
+            <div id="plan-usage-content"></div>
+            <button class="btn btn-o btn-xs mt8" onclick="nav('plans')">⭐ View Plans</button>
+          </div>
           <div class="card mb14" style="background:linear-gradient(135deg,#EBF9F2,#FFF8F0);border-color:var(--grn-m)">
             <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">📌 Upload Tips</div>
             <div id="upload-tips"></div>
@@ -1170,6 +1180,91 @@ textarea.fi{resize:vertical;min-height:80px}
       <div class="card"><div style="font-weight:700;font-size:13px;margin-bottom:12px">Feature Comparison</div><table style="width:100%;border-collapse:collapse"><thead><tr id="feat-head"></tr></thead><tbody id="feat-body"></tbody></table></div>
     </div>
 
+
+    <!-- REACTIONS PAGE -->
+    <div class="page" id="page-reactions">
+      <div class="tb"><div><div class="tb-title">😍 Reactions</div><div class="tb-sub">Record & collect surprise reactions from celebrants</div></div>
+        <button class="btn btn-o" onclick="openRecordReaction()">🎬 Record Reaction</button>
+      </div>
+      <div class="g4 mb16" id="reaction-stats"></div>
+      <div id="reactions-grid" class="media-grid"></div>
+    </div>
+
+    <!-- TEXT TO SPEECH PAGE -->
+    <div class="page" id="page-tts">
+      <div class="tb"><div><div class="tb-title">🔊 Text to Speech</div><div class="tb-sub">Convert written wishes into voice — add to your video</div></div></div>
+      <div class="g2" style="gap:20px">
+        <div>
+          <div class="card mb14">
+            <div style="font-weight:700;font-size:13px;margin-bottom:12px">✍️ Write Your Message</div>
+            <div class="fg"><label class="fl">Message Text *</label>
+              <textarea class="fi" id="tts-text" rows="6" placeholder="Happy 30th birthday Oluwaseun! This message is from all of us — your friends and family who love you so dearly…"></textarea>
+            </div>
+            <div class="g2" style="gap:10px">
+              <div class="fg"><label class="fl">Voice</label>
+                <select class="fi" id="tts-voice">
+                  <option value="0">Default (System)</option>
+                  <option value="female-warm">Female · Warm</option>
+                  <option value="male-deep">Male · Deep</option>
+                  <option value="female-bright">Female · Bright</option>
+                </select>
+              </div>
+              <div class="fg"><label class="fl">Speed <span class="mono txt-xs txt-m" id="tts-rate-lbl">1×</span></label>
+                <input type="range" min="0.5" max="2" step="0.1" value="1" style="width:100%;accent-color:var(--orange)" id="tts-rate"
+                  oninput="document.getElementById('tts-rate-lbl').textContent=parseFloat(this.value).toFixed(1)+'×'">
+              </div>
+            </div>
+            <div class="fg"><label class="fl">Pitch <span class="mono txt-xs txt-m" id="tts-pitch-lbl">1.0</span></label>
+              <input type="range" min="0.5" max="2" step="0.1" value="1" style="width:100%;accent-color:var(--purple)" id="tts-pitch"
+                oninput="document.getElementById('tts-pitch-lbl').textContent=parseFloat(this.value).toFixed(1)">
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-o" onclick="speakTTS()">▶ Preview Voice</button>
+              <button class="btn btn-ghost" onclick="stopTTS()">⏹ Stop</button>
+              <button class="btn btn-purple" onclick="recordTTS()" id="tts-record-btn">⏺ Record & Save</button>
+            </div>
+            <div id="tts-status" style="margin-top:10px;font-size:12px;color:var(--mud)"></div>
+          </div>
+          <div class="card mb14" id="tts-library-card" style="display:none">
+            <div class="fl-bc mb10"><div style="font-weight:700;font-size:13px">🔊 Generated Voice Files</div></div>
+            <div id="tts-library-list"></div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700;font-size:13px;margin-bottom:10px">📚 Quick Templates</div>
+            <div id="tts-templates"></div>
+          </div>
+        </div>
+        <div>
+          <div class="card mb14" style="background:linear-gradient(135deg,var(--pur-l),var(--blu-l));border-color:var(--pur-m)">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px">🔊 How it works</div>
+            <div class="txt-s txt-m" style="line-height:1.8">
+              1. Type your message below<br>
+              2. Choose a voice & speed<br>
+              3. Preview to hear it<br>
+              4. Click Record & Save to create audio file<br>
+              5. The audio is saved to your Media Library<br>
+              6. Add it to Video Studio timeline
+            </div>
+          </div>
+          <div class="card mb14">
+            <div style="font-weight:700;font-size:13px;margin-bottom:10px">📋 Text Messages from Library</div>
+            <div id="tts-lib-texts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEMES PAGE -->
+    <div class="page" id="page-themes">
+      <div class="tb"><div><div class="tb-title">🎨 Themes & Styles</div><div class="tb-sub">Choose a visual theme for your surprise</div></div></div>
+      <div class="g3 mb16" id="themes-grid"></div>
+      <div class="card">
+        <div style="font-weight:700;font-size:13px;margin-bottom:14px">🎨 Custom Colour Palette</div>
+        <div class="g4" style="gap:10px" id="custom-palette"></div>
+        <button class="btn btn-o mt12" onclick="applyCustomTheme()">Apply Theme</button>
+      </div>
+    </div>
+
   </div><!-- /main-area -->
 </div><!-- /app-shell -->
 
@@ -1236,6 +1331,33 @@ textarea.fi{resize:vertical;min-height:80px}
   </div>
 </div>
 
+
+<!-- RECORD REACTION MODAL -->
+<div class="ov" id="m-record-reaction">
+  <div class="modal" style="max-width:520px">
+    <button class="mclose" onclick="closeM('m-record-reaction')">×</button>
+    <div class="mt">🎬 Record Reaction</div>
+    <div class="ms">Capture the celebrant's surprise reaction via webcam</div>
+    <div style="background:#000;border-radius:10px;overflow:hidden;aspect-ratio:16/9;margin-bottom:12px;position:relative">
+      <video id="reaction-preview-vid" autoplay muted playsinline style="width:100%;height:100%;object-fit:cover;display:block"></video>
+      <div id="reaction-rec-indicator" style="display:none;position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace">● REC</div>
+      <div id="reaction-countdown" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center;font-size:72px;color:#fff;font-weight:800;font-family:'Syne',sans-serif"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-out" onclick="startReactionCam()">📷 Start Camera</button>
+      <button class="btn btn-o" id="rec-reaction-btn" onclick="recordReaction()" disabled>⏺ Record</button>
+      <button class="btn btn-ghost" id="stop-reaction-btn" onclick="stopReactionRec()" style="display:none">⏹ Stop</button>
+    </div>
+    <div id="reaction-result" style="display:none;margin-top:12px">
+      <video id="reaction-result-vid" controls style="width:100%;border-radius:8px;aspect-ratio:16/9;background:#000;margin-bottom:8px"></video>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-green" onclick="saveReaction()">💾 Save to Library</button>
+        <button class="btn btn-ghost" onclick="retakeReaction()">🔄 Retake</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"><span id="t-ico">✅</span><span id="t-msg">Done</span></div>
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -1244,11 +1366,156 @@ textarea.fi{resize:vertical;min-height:80px}
 // ═══════════════════════════════════════════════════════════════
 
 // ── CONSTANTS ──
+// ── PLAN DEFINITIONS (from pricing table) ──
+// Demo accounts always get unlimited access
 const TIERS = {
-  silver:  { l:'Silver',  i:'🥈', p:'₦1,499', v:3,  a:5,  t:10, e:2,  c:'#5C6B8A', bg:'#F0F2F8' },
-  gold:    { l:'Gold',    i:'🥇', p:'₦2,999', v:8,  a:15, t:30, e:5,  c:'#B07A00', bg:'#FFF8E6' },
-  diamond: { l:'Diamond', i:'💎', p:'₦4,999', v:25, a:50, t:100,e:20, c:'#1A6B9E', bg:'#E8F4FF' }
+  freemium: {
+    l:'Freemium', i:'🆓', p:'Free', c:'#5C6B8A', bg:'#F0F2F8', badge:'FREE',
+    msgAllowance: 2,       // monthly messages
+    videoUploads: 1,       // per month
+    signUpPoints: 20,
+    referralPoints: 20,
+    studio: 'basic',       // basic themes + limited music
+    personalization: 'basic',
+    celebrations: ['Birthday'],
+    deliverySpeed: 'basic',
+    support: 'Self-service (FAQ)',
+    ai: false, mixer: false, premiumEffects: false,
+    price: 0
+  },
+  standard: {
+    l:'Standard', i:'⭐', p:'₦2,500', c:'#0A7A4A', bg:'#F0FFF8', badge:'STANDARD',
+    msgAllowance: 20,
+    videoUploads: 5,
+    signUpPoints: 50,
+    referralPoints: 50,
+    studio: 'standard',
+    personalization: 'occasion',
+    celebrations: 'all',
+    deliverySpeed: 'scheduled',
+    support: 'Email support',
+    ai: false, mixer: false, premiumEffects: false,
+    price: 2500
+  },
+  gold: {
+    l:'Gold', i:'🥇', p:'₦4,999', c:'#B07A00', bg:'#FFF8E6', badge:'GOLD',
+    msgAllowance: 75,
+    videoUploads: 20,
+    signUpPoints: 100,
+    referralPoints: 100,
+    studio: 'full',
+    personalization: 'advanced',
+    celebrations: 'all',
+    deliverySpeed: 'priority',
+    support: 'Priority support',
+    ai: true, mixer: true, premiumEffects: false,
+    price: 4999
+  },
+  elite: {
+    l:'Elite', i:'💎', p:'₦9,999', c:'#6B21D9', bg:'#F3EBFF', badge:'ELITE',
+    msgAllowance: Infinity,
+    videoUploads: Infinity,
+    signUpPoints: 300,
+    referralPoints: 300,
+    studio: 'premium',
+    personalization: 'hyper',
+    celebrations: 'all+custom',
+    deliverySpeed: 'realtime',
+    support: 'Dedicated concierge',
+    ai: true, mixer: true, premiumEffects: true,
+    price: 9999
+  },
+  // Demo = unlimited everything
+  demo: {
+    l:'Demo', i:'🚀', p:'Free', c:'#FF6B1A', bg:'#FFF8F0', badge:'DEMO',
+    msgAllowance: Infinity, videoUploads: Infinity,
+    signUpPoints: 999, referralPoints: 999,
+    studio: 'premium', personalization: 'hyper', celebrations: 'all+custom',
+    deliverySpeed: 'realtime', support: 'Dedicated concierge',
+    ai: true, mixer: true, premiumEffects: true, price: 0
+  }
 };
+
+// Demo account emails — always get unlimited
+const DEMO_TIER = 'demo';
+const DEMO_EMAILS = ['adaeze@demo.ng','silver@demo.ng','diamond@demo.ng','emeka@demo.ng','chiamaka@demo.ng','babatunde@demo.ng','kemi@demo.ng'];
+
+function isDemoUser(u) {
+  return u && (u.isDemo === true || DEMO_EMAILS.includes(u.em || u.email));
+}
+
+function getUserTier(u) {
+  if (!u) return TIERS.freemium;
+  if (isDemoUser(u)) return TIERS.demo;
+  return TIERS[u.tier] || TIERS.freemium;
+}
+
+// ── PLAN ENFORCEMENT ──
+function checkPlanLimit(action, count) {
+  // Returns {allowed: bool, limit: number, msg: string}
+  const u = S.user; if (!u) return {allowed:false, limit:0, msg:'Please sign in'};
+  if (isDemoUser(u)) return {allowed:true, limit:Infinity, msg:''}; // demo = unlimited
+  const t = getUserTier(u);
+  if (action === 'video') {
+    const used = LIBRARY.filter(x => x.type==='video' && isThisMonth(x.created)).length;
+    const lim  = t.videoUploads;
+    if (used >= lim) return {allowed:false, limit:lim, msg:`${t.l} plan allows ${lim} video upload${lim!==1?'s':''}/month. Upgrade for more.`};
+    return {allowed:true, limit:lim, msg:''};
+  }
+  if (action === 'message') {
+    const used = (u.data?.monthlyMsgCount || 0);
+    const lim  = t.msgAllowance;
+    if (used >= lim) return {allowed:false, limit:lim, msg:`${t.l} plan allows ${lim} message${lim!==1?'s':''}/month. Upgrade for more.`};
+    return {allowed:true, limit:lim, msg:''};
+  }
+  if (action === 'ai') {
+    if (!t.ai) return {allowed:false, limit:0, msg:`AI compilation requires Gold plan or above.`};
+    return {allowed:true, limit:Infinity, msg:''};
+  }
+  if (action === 'mixer') {
+    if (!t.mixer) return {allowed:false, limit:0, msg:`Audio mixer requires Gold plan or above.`};
+    return {allowed:true, limit:Infinity, msg:''};
+  }
+  if (action === 'premiumEffects') {
+    if (!t.premiumEffects) return {allowed:false, limit:0, msg:`Premium effects require Elite plan.`};
+    return {allowed:true, limit:Infinity, msg:''};
+  }
+  if (action === 'celebration') {
+    const cel = count; // passing celebration type as count
+    if (t.celebrations === 'Birthday' && cel !== 'Birthday') return {allowed:false, limit:0, msg:`Freemium plan supports Birthday only. Upgrade for all celebration types.`};
+    return {allowed:true, limit:Infinity, msg:''};
+  }
+  return {allowed:true, limit:Infinity, msg:''};
+}
+
+function isThisMonth(ts) {
+  const d = new Date(ts), n = new Date();
+  return d.getMonth()===n.getMonth() && d.getFullYear()===n.getFullYear();
+}
+
+function showUpgradePrompt(msg, targetTier='gold') {
+  const t = TIERS[targetTier];
+  const html = `<div style="text-align:center;padding:10px 0">
+    <div style="font-size:40px;margin-bottom:8px">🔒</div>
+    <div style="font-size:15px;font-weight:800;margin-bottom:5px">Plan Limit Reached</div>
+    <div class="txt-m txt-s mb14">${msg}</div>
+    <button class="btn btn-o btn-sm" onclick="nav('plans');closeM('m-del')">⭐ Upgrade Now</button>
+  </div>`;
+  document.getElementById('m-del-msg').innerHTML = html;
+  document.getElementById('del-btn').style.display = 'none';
+  openM('m-del');
+}
+
+// ── REWARD POINTS ──
+function awardPoints(u, type) {
+  if (!u.data) return;
+  if (!u.data.points) u.data.points = 0;
+  const t = getUserTier(u);
+  const pts = type === 'signup' ? t.signUpPoints : type === 'referral' ? t.referralPoints : 0;
+  u.data.points += pts;
+  return pts;
+}
+
 const CP_ACCOUNTS = {
   'emeka@demo.ng':     { name:'Emeka Obi',        pw:'demo1234' },
   'chiamaka@demo.ng':  { name:'Chiamaka Eze',      pw:'demo1234' },
@@ -1256,9 +1523,9 @@ const CP_ACCOUNTS = {
   'kemi@demo.ng':      { name:'Kemi Adesanya',     pw:'demo1234' }
 };
 const DEMO_ACCOUNTS = {
-  'adaeze@demo.ng':  { name:'Adaeze Okonkwo',  pw:'demo1234', tier:'gold',    phone:'+234 801 234 5678', city:'Lagos' },
-  'silver@demo.ng':  { name:'Chukwuemeka Eze', pw:'demo1234', tier:'silver',  phone:'',                 city:'Abuja' },
-  'diamond@demo.ng': { name:'Ngozi Adichie',   pw:'demo1234', tier:'diamond', phone:'+234 812 345 6789', city:'Enugu' }
+  'adaeze@demo.ng':  { name:'Adaeze Okonkwo',  pw:'demo1234', tier:'demo', isDemo:true, em:'adaeze@demo.ng',  phone:'+234 801 234 5678', city:'Lagos' },
+  'silver@demo.ng':  { name:'Chukwuemeka Eze', pw:'demo1234', tier:'demo', isDemo:true, em:'silver@demo.ng',  phone:'',                  city:'Abuja' },
+  'diamond@demo.ng': { name:'Ngozi Adichie',   pw:'demo1234', tier:'demo', isDemo:true, em:'diamond@demo.ng', phone:'+234 812 345 6789', city:'Enugu' }
 };
 const PIPELINE_STAGES = [
   { id:0, label:'Event Created',    icon:'✦',  desc:'Surprise event set up'    },
@@ -1383,11 +1650,25 @@ let SS = {
 function swAuth(t){document.querySelectorAll('.a-tab').forEach((el,i)=>el.classList.toggle('on',i===(t==='login'?0:1)));document.getElementById('a-login').classList.toggle('on',t==='login');document.getElementById('a-reg').classList.toggle('on',t!=='login');document.getElementById('at-sub').textContent=t==='login'?'Sign in to plan surprises':'Create your free account';}
 function selPlan(p,el){S.regPlan=p;document.querySelectorAll('#reg-plan-g .plan-c').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');}
 function doLogin(){const e=document.getElementById('li-e').value.trim(),p=document.getElementById('li-p').value;if(!e||!p){toast('Fill all fields','e');return;}let u=DEMO_ACCOUNTS[e]||S.users[e];if(!u){toast('Account not found','e');return;}if(u.pw!==p){toast('Wrong password','e');return;}if(!u.data)u.data=seedData();loginUser(u);}
-function qLogin(tier){const m={silver:'silver@demo.ng',gold:'adaeze@demo.ng',diamond:'diamond@demo.ng'};document.getElementById('li-e').value=m[tier];document.getElementById('li-p').value='demo1234';doLogin();}
+function qLogin(k){const m={adaeze:'adaeze@demo.ng',silver:'silver@demo.ng',gold:'adaeze@demo.ng',diamond:'diamond@demo.ng'};document.getElementById('li-e').value=m[k]||'adaeze@demo.ng';document.getElementById('li-p').value='demo1234';doLogin();}
 function doReg(){const fn=document.getElementById('r-fn').value.trim(),ln=document.getElementById('r-ln').value.trim(),em=document.getElementById('r-em').value.trim(),pw=document.getElementById('r-pw').value;if(!fn||!em||!pw){toast('Fill required fields','e');return;}if(pw.length<8){toast('Password must be 8+ chars','e');return;}if(S.users[em]||DEMO_ACCOUNTS[em]){toast('Email already registered','e');return;}const u={name:fn+' '+ln,em,pw,tier:S.regPlan,phone:'',city:'Nigeria',data:seedData()};S.users[em]=u;localStorage.setItem('sz3_users',JSON.stringify(S.users));toast('Account created!','s');setTimeout(()=>loginUser(u),600);}
-function loginUser(u){S.user=u;document.getElementById('auth').style.display='none';updSidebar();nav('dashboard');const h=new Date().getHours();document.getElementById('dash-hi').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', '+u.name.split(' ')[0]+' 👋';}
+function loginUser(u){
+  S.user=u;
+  if(!u.data)u.data=seedData();
+  if(u.data.points===undefined){
+    u.data.points=0;
+    const pts=awardPoints(u,'signup');
+    if(pts>0)setTimeout(()=>toast('🎁 Welcome! You earned '+pts+' reward points!','s'),800);
+  }
+  if(!u.data.monthlyMsgCount)u.data.monthlyMsgCount=0;
+  document.getElementById('auth').style.display='none';
+  updSidebar();nav('dashboard');
+  const h=new Date().getHours();
+  document.getElementById('dash-hi').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', '+u.name.split(' ')[0]+' 👋';
+}
 function doLogout(){S.user=null;document.getElementById('auth').style.display='flex';toast('Signed out','s');}
-function updSidebar(){const u=S.user;if(!u)return;const t=TIERS[u.tier];document.getElementById('sb-name').textContent=u.name;document.getElementById('sb-tier').textContent=t.l.toUpperCase()+' · Active';document.getElementById('sb-ti').textContent=t.i;const av=document.getElementById('sb-av');av.textContent=u.name.charAt(0);av.style.background=u.tier==='silver'?'linear-gradient(135deg,#8090A8,#5C6B8A)':u.tier==='gold'?'linear-gradient(135deg,#FF6B1A,#FF9A4A)':'linear-gradient(135deg,#2A6FDB,#6A9FFF)';document.getElementById('bday-badge').textContent=(u.data?.birthdays||[]).filter(b=>daysTo(b.date)>=0&&daysTo(b.date)<=30).length;document.getElementById('lib-badge').textContent=LIBRARY.length;const sm=document.getElementById('st-med');if(sm)sm.textContent=LIBRARY.length;}
+function updSidebar(){const u=S.user;if(!u)return;const t=TIERS[u.tier];document.getElementById('sb-name').textContent=u.name;const pts=S.user.data?.points||0;
+  document.getElementById('sb-tier').textContent=getUserTier(S.user).l.toUpperCase()+(pts?' · '+pts+' pts':' · Active');document.getElementById('sb-ti').textContent=getUserTier(S.user).i;const av=document.getElementById('sb-av');av.textContent=u.name.charAt(0);av.style.background=u.tier==='silver'?'linear-gradient(135deg,#8090A8,#5C6B8A)':u.tier==='gold'?'linear-gradient(135deg,#FF6B1A,#FF9A4A)':'linear-gradient(135deg,#2A6FDB,#6A9FFF)';document.getElementById('bday-badge').textContent=(u.data?.birthdays||[]).filter(b=>daysTo(b.date)>=0&&daysTo(b.date)<=30).length;document.getElementById('lib-badge').textContent=LIBRARY.length;const sm=document.getElementById('st-med');if(sm)sm.textContent=LIBRARY.length;}
 
 // ═══════════════════════════════════════════════════════════════
 //  NAVIGATION
@@ -1420,7 +1701,9 @@ function markDelivered(id){const e=S.user.data.events.find(x=>x.id===id);if(e){e
 // ═══════════════════════════════════════════════════════════════
 function initCreate(){S.cStep=1;S.nEv={};S.tempInv=[];renderCStep();}
 function renderCStep(){for(let i=1;i<=5;i++){const s=document.getElementById('cs'+i);s.classList.remove('active','done');if(i<S.cStep)s.classList.add('done');else if(i===S.cStep)s.classList.add('active');}const b=document.getElementById('c-body');if(S.cStep===1){b.innerHTML=`<div style="font-size:17px;font-weight:800;margin-bottom:3px">Event Details</div><div class="txt-m txt-s mb16">Tell us about the surprise you're planning</div><div class="g2" style="gap:12px"><div class="fg"><label class="fl">Celebrant Name *</label><input class="fi" id="ce-cel" placeholder="Oluwaseun Adeyemi"></div><div class="fg"><label class="fl">Occasion *</label><select class="fi" id="ce-occ"><option>Birthday</option><option>Anniversary</option><option>Wedding</option><option>Graduation</option><option>Farewell</option><option>Baby Shower</option></select></div><div class="fg"><label class="fl">Event Title *</label><input class="fi" id="ce-title" placeholder="Oluwaseun's 30th Birthday Bash"></div><div class="fg"><label class="fl">Celebration Date *</label><input class="fi" type="date" id="ce-date"></div><div class="fg"><label class="fl">Emoji</label><input class="fi" id="ce-emoji" placeholder="🎂" maxlength="2"></div><div class="fg"><label class="fl">Theme</label><select class="fi" id="ce-theme"><option>Warm & Heartfelt</option><option>Fun & Energetic</option><option>Elegant & Formal</option><option>Afrobeats Vibes</option></select></div></div><div class="fg"><label class="fl">Personal Message</label><textarea class="fi" id="ce-msg" placeholder="Write a personal note…"></textarea></div><div style="display:flex;justify-content:flex-end"><button class="btn btn-o" onclick="cStep2()">Next: Add Contributors →</button></div>`;}else if(S.cStep===2){b.innerHTML=`<div style="font-size:17px;font-weight:800;margin-bottom:3px">Add Contributors</div><div class="txt-m txt-s mb16">Who will send wishes?</div><div style="display:flex;gap:7px;margin-bottom:8px"><input class="fi" id="inv-name" placeholder="Name" style="flex:1" onkeydown="if(event.key==='Enter')addTempInv()"><input class="fi" id="inv-contact" placeholder="Email or Phone" style="flex:1"><select class="fi" style="width:95px" id="inv-method"><option>WhatsApp</option><option>Email</option><option>SMS</option></select><button class="btn btn-o btn-sm" onclick="addTempInv()">Add</button></div><div id="tinv-list" style="min-height:40px;margin-bottom:14px"></div><div style="display:flex;justify-content:space-between"><button class="btn btn-ghost btn-sm" onclick="S.cStep=1;renderCStep()">← Back</button><button class="btn btn-o btn-sm" onclick="cStep3()">Next →</button></div>`;renderTempInvList();}else if(S.cStep===3){b.innerHTML=`<div style="font-size:17px;font-weight:800;margin-bottom:3px">Craft Invite Message</div><div class="g2" style="gap:14px;margin-bottom:14px"><div><div class="fg"><label class="fl">Greeting</label><input class="fi" id="inv-greeting" value="Hey [Name]! 👋"></div><div class="fg"><label class="fl">Celebrant</label><input class="fi" id="inv-cel" value="${S.nEv.cel||''}"></div><div class="fg"><label class="fl">Call to Action</label><input class="fi" id="inv-cta" value="Please record a short video/audio wish — takes just 2 minutes!"></div><button class="btn btn-out btn-sm" onclick="previewInviteMsg()">👁️ Preview</button></div><div><div style="font-weight:700;font-size:12px;margin-bottom:8px">Preview</div><div class="invite-preview" id="inv-live-prev"><div class="inv-from">📨 FROM ${(S.user?.name||'YOU').toUpperCase()}</div><div class="inv-body" id="inv-prev-body">Click Preview</div></div></div></div><div style="display:flex;justify-content:space-between"><button class="btn btn-ghost btn-sm" onclick="S.cStep=2;renderCStep()">← Back</button><button class="btn btn-o btn-sm" onclick="cStep4()">Next: Add Your Wish →</button></div>`;previewInviteMsg();}else if(S.cStep===4){b.innerHTML=`<div style="font-size:17px;font-weight:800;margin-bottom:3px">Add Your Own Wish</div><div class="g4 mb14" style="gap:10px"><div class="card card-s" style="text-align:center;cursor:pointer" onclick="nav('upload');setUpType('video',document.getElementById('ut-video'))"><div style="font-size:24px;margin-bottom:5px">🎬</div><div style="font-weight:700;font-size:12px">Video</div></div><div class="card card-s" style="text-align:center;cursor:pointer" onclick="nav('upload');setUpType('audio',document.getElementById('ut-audio'))"><div style="font-size:24px;margin-bottom:5px">🎙️</div><div style="font-weight:700;font-size:12px">Voice</div></div><div class="card card-s" style="text-align:center;cursor:pointer" onclick="nav('upload');setUpType('text',document.getElementById('ut-text'))"><div style="font-size:24px;margin-bottom:5px">✍️</div><div style="font-weight:700;font-size:12px">Text</div></div><div class="card card-s" style="text-align:center;cursor:pointer" onclick="nav('upload');setUpType('photo',document.getElementById('ut-photo'))"><div style="font-size:24px;margin-bottom:5px">📸</div><div style="font-weight:700;font-size:12px">Photos</div></div></div><div style="display:flex;justify-content:space-between"><button class="btn btn-ghost btn-sm" onclick="S.cStep=3;renderCStep()">← Back</button><button class="btn btn-o btn-sm" onclick="cStep5()">Next: Get Share Links →</button></div>`;}else if(S.cStep===5){const code=S.nEv.link||'SEUN30NG';b.innerHTML=`<div style="text-align:center;padding:16px 0 8px"><div style="font-size:52px;margin-bottom:10px">🎊</div><div style="font-size:22px;font-weight:800;margin-bottom:4px">Surprise Created!</div></div><div style="background:var(--gld-l);border:1.5px solid var(--gld-m);border-radius:11px;padding:14px;margin-bottom:10px"><div class="txt-xs mono txt-m mb5" style="color:var(--gold)">📤 UPLOAD LINK</div><div class="share-box" style="background:var(--w)"><span>📤</span><div class="share-link" style="color:var(--gold)">https://surprize.ng/upload/${code}</div><button class="btn btn-xs" style="background:var(--gold);color:#fff;border:none" onclick="cpyLink('https://surprize.ng/upload/${code}')">Copy</button></div></div><div style="background:var(--oran-l);border:1.5px solid var(--oran-m);border-radius:11px;padding:14px;margin-bottom:16px"><div class="txt-xs mono txt-m mb5" style="color:var(--orange)">🎉 SURPRISE LINK — Send to celebrant on celebration day only!</div><div class="share-box" style="background:var(--w)"><span>🎊</span><div class="share-link">https://surprize.ng/s/${code}</div><button class="btn btn-o btn-xs" onclick="cpyLink('https://surprize.ng/s/${code}')">Copy</button></div></div><div style="text-align:center"><button class="btn btn-o btn-sm" onclick="nav('events')">View All Events →</button></div>`;}}
-function cStep2(){const cel=document.getElementById('ce-cel')?.value.trim(),title=document.getElementById('ce-title')?.value.trim(),date=document.getElementById('ce-date')?.value;if(!cel||!title||!date){toast('Fill required fields','e');return;}S.nEv={id:'e'+Date.now(),title,occ:document.getElementById('ce-occ').value,cel,date,emoji:document.getElementById('ce-emoji').value||'🎉',status:'active',invites:[],uploads:[],link:'EV'+Date.now().toString(36).toUpperCase(),pipeline:0,created:Date.now()};S.cStep=2;renderCStep();}
+function cStep2(){const cel=document.getElementById('ce-cel')?.value.trim(),title=document.getElementById('ce-title')?.value.trim(),date=document.getElementById('ce-date')?.value,occ=document.getElementById('ce-occ')?.value||'Birthday';
+  if(!cel||!title||!date){toast('Fill required fields','e');return;}
+  const celCk=checkPlanLimit('celebration',occ);if(!celCk.allowed){showUpgradePrompt(celCk.msg,'standard');return;}S.nEv={id:'e'+Date.now(),title,occ:document.getElementById('ce-occ').value,cel,date,emoji:document.getElementById('ce-emoji').value||'🎉',status:'active',invites:[],uploads:[],link:'EV'+Date.now().toString(36).toUpperCase(),pipeline:0,created:Date.now()};S.cStep=2;renderCStep();}
 function addTempInv(){const name=document.getElementById('inv-name').value.trim();if(!name){toast('Enter a name','e');return;}S.tempInv.push({name,contact:document.getElementById('inv-contact').value.trim(),method:document.getElementById('inv-method').value,sent:false,responded:false});document.getElementById('inv-name').value='';document.getElementById('inv-contact').value='';renderTempInvList();}
 function renderTempInvList(){const el=document.getElementById('tinv-list');if(!el)return;el.innerHTML=S.tempInv.length?S.tempInv.map((inv,i)=>`<div style="display:flex;align-items:center;gap:9px;padding:8px 11px;background:var(--c1);border-radius:9px;margin-bottom:5px"><div class="av" style="width:26px;height:26px;font-size:10px;background:var(--c3);color:var(--ink3)">${inv.name.charAt(0)}</div><div style="flex:1"><div style="font-size:12px;font-weight:600">${inv.name}</div><div class="txt-xs txt-m">${inv.contact||'No contact'} · ${inv.method}</div></div><button class="btn btn-ghost btn-xs" onclick="S.tempInv.splice(${i},1);renderTempInvList()">×</button></div>`).join(''):'<span class="txt-m txt-s">Add contributors above</span>';}
 function cStep3(){if(S.nEv)S.nEv.invites=S.tempInv.map(x=>({...x}));S.cStep=3;renderCStep();}
@@ -1457,7 +1740,10 @@ let _currentUpFile=null;
 async function handleMediaFileSelect(input){const file=input.files?.[0];if(!file)return;_currentUpFile=file;const url=URL.createObjectURL(file);const sizeMB=(file.size/1024/1024).toFixed(1)+' MB';let dur=0;if(S.upType==='video'||S.upType==='audio')dur=await getMediaDur(url,S.upType);const thumbUrl=S.upType==='video'?await capVidThumb(url):null;const wrap=document.getElementById('up-preview-area');if(S.upType==='video'){wrap.innerHTML=`<div class="card" style="background:var(--c2)"><video src="${url}" controls style="width:100%;border-radius:8px;aspect-ratio:16/9;background:#000;margin-bottom:10px"></video><div class="fl-bc mb8"><div><div class="txt-s fw7">📁 ${file.name}</div><div class="mono txt-xs txt-m">${sizeMB} · ${fmtT(dur)}</div></div><a href="${url}" download="${file.name}" class="btn btn-out btn-xs">⬇️ Download</a></div></div>`;}else{wrap.innerHTML=`<div class="card" style="background:var(--c2)"><audio src="${url}" controls style="width:100%;margin-bottom:10px"></audio><div class="fl-bc mb8"><div><div class="txt-s fw7">🎙️ ${file.name}</div><div class="mono txt-xs txt-m">${sizeMB} · ${fmtT(dur)}</div></div><a href="${url}" download="${file.name}" class="btn btn-out btn-xs">⬇️ Download</a></div></div>`;}const tf=document.getElementById('up-title');if(tf)tf.value=file.name.replace(/\.[^.]+$/,'').replace(/_/g,' ');document.getElementById('up-form-title').textContent=S.upType==='video'?'📹 Video Details':'🎙️ Audio Details';document.getElementById('up-meta-form').style.display='block';_currentUpFile._url=url;_currentUpFile._dur=dur;_currentUpFile._thumb=thumbUrl;_currentUpFile._sizeMB=sizeMB;}
 async function handlePhotoUpload(files){const strip=document.getElementById('uploaded-photos-strip');let added=0;for(const file of files){if(!file.type.startsWith('image/'))continue;const url=URL.createObjectURL(file);const id='photo_'+Date.now()+'_'+ri(1000,9999);const item={id,type:'photo',name:file.name.replace(/\.[^.]+$/,''),from:'Upload',note:'',event:'',size:(file.size/1024/1024).toFixed(1)+' MB',dur:0,url,thumb:url,file,created:Date.now()};LIBRARY.push(item);if(strip){const el=document.createElement('div');el.className='photo-item';el.id='pi-'+id;el.innerHTML=`<img src="${url}" alt=""><div class="photo-del" onclick="rmUploadedPhoto('${id}')">×</div><div class="photo-order">${LIBRARY.filter(x=>x.type==='photo').length}</div>`;strip.appendChild(el);}added++;}updSidebar();renderRecentList();if(added)toast(`✅ ${added} photo(s) added to library!`,'s');}
 function rmUploadedPhoto(id){const item=LIBRARY.find(x=>x.id===id);if(item?.url)URL.revokeObjectURL(item.url);LIBRARY=LIBRARY.filter(x=>x.id!==id);const el=document.getElementById('pi-'+id);if(el)el.remove();updSidebar();}
-async function saveUpload(){const title=document.getElementById('up-title')?.value.trim();if(!title){toast('Please add a title','e');return;}if(!_currentUpFile){toast('Please select a file first','e');return;}const item={id:'media_'+Date.now(),type:S.upType,name:title,from:document.getElementById('up-from')?.value.trim()||'Unknown',note:document.getElementById('up-note')?.value.trim()||'',event:document.getElementById('up-event')?.value||'',size:_currentUpFile._sizeMB||(((_currentUpFile.size||0)/1024/1024).toFixed(1)+' MB'),dur:_currentUpFile._dur||0,url:_currentUpFile._url,thumb:_currentUpFile._thumb,file:_currentUpFile,created:Date.now()};LIBRARY.push(item);toast(`✅ "${title}" saved to library!`,'s');resetUpload();updSidebar();renderRecentList();}
+async function saveUpload(){const title=document.getElementById('up-title')?.value.trim();if(!title){toast('Please add a title','e');return;}if(!_currentUpFile){toast('Please select a file first','e');return;}
+  if(S.upType==='video'){const ck=checkPlanLimit('video');if(!ck.allowed){showUpgradePrompt(ck.msg);return;}}
+  else{const ck=checkPlanLimit('message');if(!ck.allowed){showUpgradePrompt(ck.msg);return;}}
+  if(S.user?.data){S.user.data.monthlyMsgCount=(S.user.data.monthlyMsgCount||0)+1;}const item={id:'media_'+Date.now(),type:S.upType,name:title,from:document.getElementById('up-from')?.value.trim()||'Unknown',note:document.getElementById('up-note')?.value.trim()||'',event:document.getElementById('up-event')?.value||'',size:_currentUpFile._sizeMB||(((_currentUpFile.size||0)/1024/1024).toFixed(1)+' MB'),dur:_currentUpFile._dur||0,url:_currentUpFile._url,thumb:_currentUpFile._thumb,file:_currentUpFile,created:Date.now()};LIBRARY.push(item);toast(`✅ "${title}" saved to library!`,'s');resetUpload();updSidebar();renderRecentList();}
 function saveTextUpload(){const body=document.getElementById('up-txt-body')?.value.trim(),from=document.getElementById('up-txt-from')?.value.trim();if(!body){toast('Write your message first','e');return;}if(!from){toast('Add your name','e');return;}const item={id:'text_'+Date.now(),type:'text',name:from+"'s Message",textBody:body,from,style:document.getElementById('up-txt-style')?.value||'normal',event:'',size:body.length+' chars',dur:Math.ceil(body.split(' ').length/3),url:null,thumb:null,created:Date.now()};LIBRARY.push(item);const tb=document.getElementById('up-txt-body'),fb=document.getElementById('up-txt-from');if(tb)tb.value='';if(fb)fb.value='';toast('✅ Message saved to library!','s');updSidebar();renderRecentList();}
 function resetUpload(){_currentUpFile=null;document.getElementById('up-meta-form').style.display='none';document.getElementById('up-preview-area').innerHTML='';const fi=document.getElementById('up-file-input');if(fi)fi.value='';const tf=document.getElementById('up-title');if(tf)tf.value='';}
 function renderRecentList(){const el=document.getElementById('recent-list');if(!el)return;const recent=LIBRARY.slice(-5).reverse();el.innerHTML=recent.length?recent.map(item=>`<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)"><div style="width:32px;height:32px;border-radius:7px;background:var(--c2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;overflow:hidden">${item.thumb?`<img src="${item.thumb}" style="width:100%;height:100%;object-fit:cover;border-radius:7px" alt="">`:item.type==='audio'?'🎙️':item.type==='text'?'✍️':item.type==='photo'?'📸':'🎬'}</div><div style="flex:1;min-width:0"><div class="txt-s fw7" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${item.name}</div><div class="txt-xs txt-m">${item.type} · ${item.size}</div></div>${item.url?`<a href="${item.url}" download="${item.name}" class="btn btn-ghost btn-xs" title="Download">⬇️</a>`:''}</div>`).join(''):'<div class="txt-xs txt-m">Nothing uploaded yet</div>';}
@@ -1570,6 +1856,9 @@ function renderStudioTransitions() {
 
 // ── VIDEO CLIP UPLOAD & TRIM ──
 async function handleVideoUpload(files) {
+  // Check plan limit before upload
+  const check = checkPlanLimit('video');
+  if (!check.allowed) { showUpgradePrompt(check.msg); return; }
   let added = 0;
   for (let i = 0; i < files.length && ST.clips.length < 4; i++) {
     const file = files[i];
@@ -2537,6 +2826,8 @@ function downloadVideo() {
 
 function studioAI() { setStudioMode('ai'); setTimeout(()=>runAI(),200); }
 function runAI() {
+  const ck = checkPlanLimit('ai');
+  if (!ck.allowed) { showUpgradePrompt(ck.msg, 'gold'); return; }
   const btn = document.getElementById('aiBtn');
   if (!btn || ST.isRendering) return;
   btn.textContent = '🤖 Compiling…'; btn.disabled = true;
@@ -3293,8 +3584,70 @@ function renderDelivery(){const u=S.user;if(!u)return;document.getElementById('d
 function renderTracker(){const u=S.user;if(!u)return;const ev=u.data.events[0];if(ev)renderPipelineStatus('tracker-pipeline',ev.pipeline);const logEl=document.getElementById('full-activity-log');logEl.style.cssText='position:relative;padding-left:24px';logEl.innerHTML=`<div style="position:absolute;left:9px;top:0;bottom:0;width:2px;background:var(--border)"></div>`+[...u.data.activity,{type:'done',icon:'✦',text:'Account registered on SURPRIZE',time:'7d ago',stage:'Registration'}].map(a=>`<div style="position:relative;margin-bottom:18px"><div style="position:absolute;left:-22px;top:8px;width:12px;height:12px;border-radius:50%;background:${a.type==='done'?'var(--green)':'var(--orange)'};border:2px solid var(--c1)"></div><div style="background:var(--w);border:1.5px solid var(--border);border-radius:11px;padding:12px 14px;box-shadow:var(--shadow)"><div style="font-size:10px;color:var(--mud);font-family:'JetBrains Mono',monospace;float:right">${a.time}</div><div style="font-weight:700;font-size:13px">${a.icon} ${a.text}</div><div style="font-size:11px;color:var(--mud);margin-top:3px">${a.stage}</div></div></div>`).join('');document.getElementById('event-stats-panel').innerHTML=u.data.events.map(e=>`<div style="background:var(--c1);border:1.5px solid var(--border);border-radius:9px;padding:11px;margin-bottom:7px"><div class="fl-bc mb5"><div style="font-weight:700;font-size:12px">${e.emoji} ${e.title}</div><span class="badge ${e.status==='active'?'b-g':e.status==='delivered'?'b-p':'b-gld'}">${e.status}</span></div><div style="display:flex;gap:10px;flex-wrap:wrap"><span class="txt-xs txt-m">📅 ${fmtD(e.date)}</span><span class="txt-xs txt-m">👥 ${e.invites.length} invited</span><span class="txt-xs txt-m">✓ ${e.invites.filter(x=>x.responded).length} responded</span></div><div class="prog mt8"><div class="prog-f" style="width:${(e.pipeline/5)*100}%"></div></div></div>`).join('');}
 function renderProfile(){const u=S.user;if(!u)return;document.getElementById('pf-name-d').textContent=u.name;document.getElementById('pf-email-d').textContent=u.em||'';document.getElementById('pf-name').value=u.name;document.getElementById('pf-email').value=u.em||'';document.getElementById('pf-phone').value=u.phone||'';document.getElementById('pf-city').value=u.city||'';const av=document.getElementById('pf-av');av.textContent=u.name.charAt(0);const t=TIERS[u.tier];document.getElementById('pf-tier-d').innerHTML=`<span class="badge" style="background:${t.bg};color:${t.c}">${t.i} ${t.l} Plan</span>`;document.getElementById('notif-prefs').innerHTML=['Event reminders','New media alerts','Delivery confirmations','Birthday countdowns'].map(n=>`<label style="display:flex;align-items:center;gap:9px;cursor:pointer;padding:7px 0;border-bottom:1px solid var(--border)"><input type="checkbox" checked onchange="toast('✅ Saved','s')" style="accent-color:var(--orange);width:14px;height:14px"><span class="txt-s">${n}</span></label>`).join('');}
 function savePF(){const u=S.user;if(!u)return;u.name=document.getElementById('pf-name').value.trim()||u.name;u.phone=document.getElementById('pf-phone').value.trim();u.city=document.getElementById('pf-city').value.trim();updSidebar();renderProfile();toast('✅ Profile updated!','s');}
-function renderPlans(){const u=S.user;if(!u)return;document.getElementById('plans-grid').innerHTML=Object.entries(TIERS).map(([k,t])=>`<div class="plan-big ${u.tier===k?'cur':''}"><div style="font-size:26px;margin-bottom:4px">${t.i}</div><div style="font-size:16px;font-weight:800;color:${t.c}">${t.l}</div><div class="plan-price">${t.p}<span style="font-size:12px;color:var(--mud);font-weight:400">/mo</span></div><ul class="plan-feats"><li><span style="color:var(--green);font-weight:700">✓</span> ${t.v} video uploads</li><li><span style="color:var(--green);font-weight:700">✓</span> ${t.a} voice notes</li><li><span style="color:var(--green);font-weight:700">✓</span> ${t.t} text wishes</li><li><span style="color:var(--green);font-weight:700">✓</span> ${t.e} active events</li><li><span style="color:var(--green);font-weight:700">✓</span> Unlimited photos</li>${k!=='silver'?`<li><span style="color:var(--green);font-weight:700">✓</span> AI compilation</li>`:`<li><span style="color:var(--mud)">—</span> AI compilation</li>`}${k==='diamond'?`<li><span style="color:var(--green);font-weight:700">✓</span> 1080p export</li>`:''}</ul><button class="btn ${u.tier===k?'btn-out':'btn-o'} btn-full btn-sm" style="margin-top:12px" onclick="upgPlan('${k}')">${u.tier===k?'Current Plan':'Upgrade →'}</button></div>`).join('');document.getElementById('feat-head').innerHTML='<th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:700;color:var(--mud);text-transform:uppercase">Feature</th>'+Object.values(TIERS).map(t=>`<th style="text-align:center;padding:8px 10px;font-size:10px;font-weight:700;color:var(--mud);text-transform:uppercase">${t.i} ${t.l}</th>`).join('');const rows=[['Videos','3','8','25'],['Voice Notes','5','15','50'],['Text Wishes','10','30','100'],['Events','2','5','20'],['Photos','Unlimited','Unlimited','Unlimited'],['Photo Frames','4','All','All'],['Slideshow Export','720p','720p','1080p'],['AI Compile','—','✅','✅'],['Video Export','—','720p','1080p']];document.getElementById('feat-body').innerHTML=rows.map(r=>`<tr style="border-bottom:1px solid var(--border)">${r.map((c,i)=>`<td style="${i>0?'text-align:center;':''}padding:9px 10px;font-size:12px">${c}</td>`).join('')}</tr>`).join('');}
-function upgPlan(p){if(!S.user)return;if(S.user.tier===p){toast('Already on this plan','s');return;}S.user.tier=p;updSidebar();renderPlans();toast(`🎉 Upgraded to ${TIERS[p].l}!`,'s');}
+function renderPlans(){
+  const u=S.user;if(!u)return;
+  const cur=getUserTier(u);
+  const planOrder=['freemium','standard','gold','elite'];
+  const el=document.getElementById('plans-grid');
+  if(el){
+    el.innerHTML=planOrder.map(k=>{
+      const t=TIERS[k];
+      const isCur=(isDemoUser(u)?false:u.tier===k);
+      const isDemo=isDemoUser(u);
+      return`<div class="plan-big ${isCur?'cur':''}" style="position:relative">
+        ${k==='gold'?'<div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:3px 14px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap">MOST POPULAR</div>':''}
+        ${k==='elite'?'<div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;padding:3px 14px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap">BEST VALUE</div>':''}
+        <div style="font-size:26px;margin-bottom:4px">${t.i}</div>
+        <div style="font-size:16px;font-weight:800;color:${t.c}">${t.l}</div>
+        <div class="plan-price">${t.p}<span style="font-size:12px;color:var(--mud);font-weight:400">/mo</span></div>
+        <ul class="plan-feats">
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.msgAllowance===Infinity?'Unlimited':t.msgAllowance} messages/month</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.videoUploads===Infinity?'Unlimited':t.videoUploads} video upload${t.videoUploads===1?'':'s'}/month</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.signUpPoints} sign-up points</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.referralPoints} referral points</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.studio.charAt(0).toUpperCase()+t.studio.slice(1)} studio</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${Array.isArray(t.celebrations)?t.celebrations.join(', '):t.celebrations==='all'?'All celebrations':t.celebrations==='all+custom'?'All + custom occasions':t.celebrations}</li>
+          <li>${t.ai?'<span style="color:var(--green);font-weight:700">✓</span>':'<span style="color:var(--mud)">—</span>'} AI Auto-Compilation</li>
+          <li>${t.mixer?'<span style="color:var(--green);font-weight:700">✓</span>':'<span style="color:var(--mud)">—</span>'} Audio Mixer</li>
+          <li>${t.premiumEffects?'<span style="color:var(--green);font-weight:700">✓</span>':'<span style="color:var(--mud)">—</span>'} Premium Effects</li>
+          <li><span style="color:var(--green);font-weight:700">✓</span> ${t.support}</li>
+        </ul>
+        ${isDemo?'<div class="btn btn-out btn-full btn-sm" style="margin-top:12px;text-align:center;opacity:.6">Demo Account</div>':
+          isCur?'<div class="btn btn-out btn-full btn-sm" style="margin-top:12px;text-align:center">✓ Current Plan</div>':
+          `<button class="btn btn-o btn-full btn-sm" style="margin-top:12px" onclick="upgPlan('${k}')">Upgrade to ${t.l} →</button>`}
+      </div>`;
+    }).join('');
+  }
+  // Feature comparison table
+  const th=document.getElementById('feat-head');
+  const tb=document.getElementById('feat-body');
+  if(th){th.innerHTML='<th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:700;color:var(--mud);text-transform:uppercase">Feature</th>'+planOrder.map(k=>`<th style="text-align:center;padding:8px 10px;font-size:10px;font-weight:700;color:${TIERS[k].c};text-transform:uppercase">${TIERS[k].i} ${TIERS[k].l}</th>`).join('');}
+  const rows=[
+    ['Monthly Messages','2','20','75','Unlimited'],
+    ['Video Uploads/mo','1','5','20','Unlimited'],
+    ['Sign-Up Points','20','50','100','300'],
+    ['Referral Points','20','50','100','300'],
+    ['Studio Access','Basic','Standard','Full + Mixer','Premium + Advanced'],
+    ['AI Compilation','—','—','✅','✅'],
+    ['Audio Mixer','—','—','✅','✅'],
+    ['Premium Effects','—','—','—','✅'],
+    ['Celebrations','Birthday only','All standard','All standard','All + custom'],
+    ['Delivery Speed','Basic','Scheduled','Priority','Real-time'],
+    ['Customer Support','FAQ','Email','Priority','Dedicated'],
+  ];
+  if(tb){tb.innerHTML=rows.map(r=>`<tr style="border-bottom:1px solid var(--border)">${r.map((cell,i)=>`<td style="${i>0?'text-align:center;':''}padding:9px 10px;font-size:12px${cell==='—'?';color:var(--mud)':''}${cell==='✅'?';color:var(--green);font-weight:700':''}">${cell}</td>`).join('')}</tr>`).join('');}
+}
+
+
+function upgPlan(p){
+  if(!S.user)return;
+  if(isDemoUser(S.user)){toast('Demo accounts have unlimited access already!','s');return;}
+  if(S.user.tier===p){toast('Already on this plan','s');return;}
+  S.user.tier=p;
+  // Award sign-up points difference
+  updSidebar();renderPlans();
+  toast('🎉 Upgraded to '+TIERS[p].l+'! You now have '+TIERS[p].msgAllowance+' messages/month.','s');
+}
 
 // ═══════════════════════════════════════════════════════════════
 //  CONTRIBUTOR PORTAL
@@ -3393,6 +3746,604 @@ window.addEventListener('resize',()=>{
   if(window.innerWidth>900){sb.style.transform='';sb.classList.remove('open');}
   else if(!sb.classList.contains('open')){sb.style.transform='translateX(-100%)';}
 });
+
+
+// ═══════════════════════════════════════════════════════════════
+//  NEW FEATURES: Reactions · Text-to-Speech · Themes
+// ═══════════════════════════════════════════════════════════════
+
+// ── REACTIONS ──
+let REACTIONS = [];   // {id, url, blob, name, from, event, dur, thumb, created}
+let reactionStream = null, reactionRec = null, reactionChunks = [];
+
+function renderReactions() {
+  updReactBadge();
+  renderReactionStats();
+  renderReactionsGrid();
+}
+
+function updReactBadge() {
+  const b = document.getElementById('react-badge');
+  if (b) b.textContent = REACTIONS.length;
+}
+
+function renderReactionStats() {
+  const el = document.getElementById('reaction-stats'); if (!el) return;
+  el.innerHTML = [
+    {n:REACTIONS.length,         l:'Total',   e:'😍'},
+    {n:REACTIONS.filter(r=>r.event).length, l:'Tagged',  e:'🏷️'},
+    {n:Math.round(REACTIONS.reduce((a,r)=>a+(r.dur||0),0)), l:'Seconds', e:'⏱️'},
+    {n:REACTIONS.length>0?'★ New':'—',      l:'Latest',  e:'⭐'},
+  ].map(s=>`<div class="stat" style="padding:14px"><div class="stat-lbl">${s.e} ${s.l}</div><div class="stat-n" style="font-size:26px">${s.n}</div></div>`).join('');
+}
+
+function renderReactionsGrid() {
+  const el = document.getElementById('reactions-grid'); if (!el) return;
+  if (!REACTIONS.length) {
+    el.innerHTML = `<div class="empty" style="grid-column:1/-1;padding:48px 20px">
+      <div style="font-size:52px;margin-bottom:12px">😍</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:6px">No reactions yet</div>
+      <div class="txt-m txt-s mb16">Record the celebrant's surprise reaction with their webcam or phone</div>
+      <button class="btn btn-o" onclick="openRecordReaction()">🎬 Record First Reaction</button>
+    </div>`; return;
+  }
+  el.innerHTML = REACTIONS.slice().reverse().map(r => `
+    <div class="media-card">
+      <div class="media-thumb" style="cursor:pointer" onclick="previewReaction('${r.id}')">
+        ${r.thumb ? `<img src="${r.thumb}" style="width:100%;height:100%;object-fit:cover" alt="">` :
+          `<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--pur-l),var(--blu-l));display:flex;align-items:center;justify-content:center;font-size:32px">😍</div>`}
+        <span class="media-type-pill pill-video">REACTION</span>
+        ${r.dur ? `<span class="media-dur">${fmtT(r.dur)}</span>` : ''}
+        <div class="media-hover-ov">
+          <button class="btn btn-sm" style="background:rgba(255,255,255,.92);color:var(--ink);border:none">▶ Play</button>
+        </div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-name">${r.name}</div>
+        <div class="mc-meta">${r.from} · ${fmtD(r.created)}</div>
+        <div class="mc-actions">
+          <button class="btn btn-xs btn-o" onclick="addReactionToStudio('${r.id}')">＋ Studio</button>
+          <a href="${r.url}" download="${r.name}.webm" class="btn btn-xs btn-out">⬇️</a>
+          <button class="btn btn-red btn-xs" onclick="deleteReaction('${r.id}')">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openRecordReaction() {
+  document.getElementById('reaction-result').style.display = 'none';
+  document.getElementById('reaction-preview-vid').style.display = 'block';
+  const btn = document.getElementById('rec-reaction-btn'); if (btn) btn.disabled = true;
+  const stopBtn = document.getElementById('stop-reaction-btn'); if (stopBtn) stopBtn.style.display = 'none';
+  openM('m-record-reaction');
+}
+
+async function startReactionCam() {
+  try {
+    reactionStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
+    const vid = document.getElementById('reaction-preview-vid');
+    vid.srcObject = reactionStream;
+    const btn = document.getElementById('rec-reaction-btn'); if (btn) btn.disabled = false;
+    toast('📷 Camera ready! Click Record when ready','s');
+  } catch(e) {
+    toast('Camera access denied. Allow camera permission and try again.','e');
+  }
+}
+
+function recordReaction() {
+  if (!reactionStream) { toast('Start camera first','e'); return; }
+  reactionChunks = [];
+  // Countdown 3..2..1
+  const cd = document.getElementById('reaction-countdown');
+  if (cd) { cd.style.display = 'flex'; cd.textContent = '3'; }
+  let count = 3;
+  const iv = setInterval(() => {
+    count--;
+    if (count > 0) { if (cd) cd.textContent = count; }
+    else {
+      clearInterval(iv);
+      if (cd) cd.style.display = 'none';
+      // Start recording
+      const mime = ['video/webm;codecs=vp9,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
+      reactionRec = new MediaRecorder(reactionStream, { mimeType:mime });
+      reactionRec.ondataavailable = e => { if (e.data?.size) reactionChunks.push(e.data); };
+      reactionRec.start(100);
+      const ind = document.getElementById('reaction-rec-indicator'); if (ind) ind.style.display = 'block';
+      const recBtn = document.getElementById('rec-reaction-btn'); if (recBtn) recBtn.disabled = true;
+      const stopBtn = document.getElementById('stop-reaction-btn'); if (stopBtn) stopBtn.style.display = 'inline-flex';
+      toast('⏺ Recording… Click Stop when done','s');
+    }
+  }, 1000);
+}
+
+async function stopReactionRec() {
+  if (!reactionRec) return;
+  reactionRec.stop();
+  const ind = document.getElementById('reaction-rec-indicator'); if (ind) ind.style.display = 'none';
+  const stopBtn = document.getElementById('stop-reaction-btn'); if (stopBtn) stopBtn.style.display = 'none';
+  await new Promise(ok => { reactionRec.onstop = ok; });
+  const blob = new Blob(reactionChunks, { type:'video/webm' });
+  const url  = URL.createObjectURL(blob);
+  const rv   = document.getElementById('reaction-result-vid');
+  rv.src = url; rv._blob = blob; rv._url = url;
+  document.getElementById('reaction-preview-vid').style.display = 'none';
+  document.getElementById('reaction-result').style.display = 'block';
+  toast('✅ Reaction recorded!','s');
+}
+
+async function saveReaction() {
+  const rv = document.getElementById('reaction-result-vid');
+  if (!rv?._blob) { toast('No reaction recorded','e'); return; }
+  const dur = await getMediaDur(rv._url, 'video');
+  const thumb = await capVidThumb(rv._url);
+  const u = S.user;
+  const celebrant = u?.data?.events?.find(e=>e.status==='active')?.cel || 'Celebrant';
+  const id = 'reaction_' + Date.now();
+  const item = { id, url:rv._url, blob:rv._blob, name:`${celebrant}'s Reaction`, from:celebrant, event:'', dur, thumb, created:Date.now() };
+  REACTIONS.push(item);
+  // Also add to library
+  LIBRARY.push({ id, type:'video', name:item.name, from:celebrant, note:'Surprise reaction', event:'', size:(rv._blob.size/1024/1024).toFixed(1)+' MB', dur, url:rv._url, thumb, file:null, created:Date.now() });
+  // Stop camera
+  if (reactionStream) { reactionStream.getTracks().forEach(t=>t.stop()); reactionStream=null; }
+  closeM('m-record-reaction');
+  updSidebar(); updReactBadge(); renderReactionsGrid(); renderReactionStats();
+  if (u?.data?.activity) u.data.activity.unshift({type:'done',icon:'😍',text:`${celebrant}'s surprise reaction recorded!`,time:'Just now',stage:'Reaction Captured'});
+  toast('🎊 Reaction saved to library!','s');
+}
+
+function retakeReaction() {
+  document.getElementById('reaction-result').style.display = 'none';
+  document.getElementById('reaction-preview-vid').style.display = 'block';
+  const recBtn = document.getElementById('rec-reaction-btn'); if (recBtn) recBtn.disabled = false;
+  reactionChunks = [];
+}
+
+function previewReaction(id) {
+  const r = REACTIONS.find(x=>x.id===id); if (!r) return;
+  document.getElementById('prev-title').textContent = r.name;
+  document.getElementById('prev-content').innerHTML = `
+    <video src="${r.url}" controls autoplay style="width:100%;max-width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:8px"></video>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <a href="${r.url}" download="${r.name}.webm" class="btn btn-o btn-sm">⬇️ Download</a>
+      <button class="btn btn-out btn-sm" onclick="addReactionToStudio('${r.id}');closeM('m-media-preview')">＋ Add to Studio</button>
+    </div>`;
+  openM('m-media-preview');
+}
+
+function deleteReaction(id) {
+  if (!confirm('Delete this reaction?')) return;
+  const r = REACTIONS.find(x=>x.id===id);
+  if (r?.url) URL.revokeObjectURL(r.url);
+  REACTIONS = REACTIONS.filter(x=>x.id!==id);
+  LIBRARY = LIBRARY.filter(x=>x.id!==id);
+  renderReactionsGrid(); renderReactionStats(); updReactBadge(); updSidebar();
+  toast('Deleted','s');
+}
+
+function addReactionToStudio(id) {
+  const r = REACTIONS.find(x=>x.id===id);
+  if (!r) return;
+  if (ST.clips.length >= 4) { toast('Studio is full (max 4 clips)','e'); return; }
+  ST.clips.push({ id:r.id, file:null, url:r.url, dur:r.dur||5, name:r.name, thumb:r.thumb, trimStart:0, trimEnd:r.dur||5, transition:'fade' });
+  ST.timelineOrder.push(ST.clips.length-1);
+  ST.totalDur += r.dur||5;
+  toast('😍 Reaction added to Video Studio','s');
+  nav('studio');
+}
+
+// ── TEXT TO SPEECH ──
+let ttsUtterance = null;
+let ttsRecorded  = [];   // {id, url, blob, text, name, dur}
+
+function initTTS() {
+  renderTTSTemplates();
+  renderTTSLibTexts();
+  renderTTSLibrary();
+}
+
+const TTS_TEMPLATES = [
+  { label:'🎂 Birthday',   text:'Happy birthday! Today is all about you and how amazing you are. May this year bring you more joy, more success, and more beautiful memories than ever before. We love you!' },
+  { label:'💍 Anniversary', text:'Congratulations on this beautiful milestone! Your love story continues to inspire everyone around you. Here\'s to many more years of love, laughter, and togetherness.' },
+  { label:'🎓 Graduation',  text:'Congratulations graduate! You did it! Years of hard work and dedication have brought you to this incredible moment. The world is ready for everything you are about to achieve.' },
+  { label:'🙏 Prayer',      text:'Heavenly Father, on this special day we lift up your beloved child and commit them into your mighty hands. May every dream they carry come to pass. Amen. Happy celebration!' },
+  { label:'😂 Funny',       text:'Well well well — look who decided to get older! Not us though, we\'re still 21 right? Just kidding — happy birthday to the world\'s greatest human. We\'re so proud of you!' },
+  { label:'💌 Heartfelt',   text:'Words cannot fully express how much you mean to all of us. You bring so much light into every room you enter and into every life you touch. Today we celebrate YOU!' },
+];
+
+function renderTTSTemplates() {
+  const el = document.getElementById('tts-templates'); if (!el) return;
+  el.innerHTML = TTS_TEMPLATES.map(t => `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--c1);border:1.5px solid var(--border);border-radius:9px;margin-bottom:6px;cursor:pointer"
+         onclick="document.getElementById('tts-text').value=${JSON.stringify(t.text)};toast('Template loaded','s')">
+      <span style="font-size:18px">${t.label.split(' ')[0]}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:700">${t.label.replace(/^\S+\s/,'')}</div>
+        <div class="txt-xs txt-m" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.text.substring(0,60)}…</div>
+      </div>
+      <span style="font-size:10px;color:var(--orange);font-weight:700">Use →</span>
+    </div>`).join('');
+}
+
+function renderTTSLibTexts() {
+  const el = document.getElementById('tts-lib-texts'); if (!el) return;
+  const texts = LIBRARY.filter(x=>x.type==='text');
+  if (!texts.length) { el.innerHTML = '<div class="txt-xs txt-m">No text messages in library yet.</div>'; return; }
+  el.innerHTML = texts.map(t => `
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--grn-l);border:1.5px solid var(--grn-m);border-radius:9px;margin-bottom:6px">
+      <span style="font-size:14px;flex-shrink:0">✍️</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;font-weight:700;margin-bottom:2px">${t.from}</div>
+        <div class="txt-xs" style="color:var(--green);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(t.textBody||t.name).substring(0,70)}…</div>
+      </div>
+      <button class="btn btn-xs btn-green" onclick="document.getElementById('tts-text').value=${JSON.stringify(t.textBody||t.name)};toast('✅ Loaded','s')">Load</button>
+    </div>`).join('');
+}
+
+function renderTTSLibrary() {
+  if (!ttsRecorded.length) return;
+  const card = document.getElementById('tts-library-card');
+  const list = document.getElementById('tts-library-list');
+  if (!card || !list) return;
+  card.style.display = 'block';
+  list.innerHTML = ttsRecorded.map((r,i) => `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--gld-l);border:1.5px solid var(--gld-m);border-radius:9px;margin-bottom:6px">
+      <span style="font-size:18px">🔊</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.name}</div>
+        <div class="txt-xs txt-m">${fmtT(r.dur)} · Web Speech API</div>
+      </div>
+      <audio src="${r.url}" controls style="height:26px;max-width:110px;min-width:0"></audio>
+      <a href="${r.url}" download="${r.name}.webm" class="btn btn-ghost btn-xs">⬇️</a>
+      <button class="btn btn-o btn-xs" onclick="addTTSToStudio(${i})">＋ Studio</button>
+    </div>`).join('');
+}
+
+function speakTTS() {
+  const text = document.getElementById('tts-text')?.value.trim();
+  if (!text) { toast('Enter some text first','e'); return; }
+  if (!window.speechSynthesis) { toast('Text-to-speech not supported in this browser','e'); return; }
+  stopTTS();
+  const voices = window.speechSynthesis.getVoices();
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsUtterance.rate  = parseFloat(document.getElementById('tts-rate')?.value) || 1;
+  ttsUtterance.pitch = parseFloat(document.getElementById('tts-pitch')?.value) || 1;
+  // Try to select a nice voice
+  const preferred = voices.find(v => v.lang.startsWith('en') && !v.name.includes('Google')) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+  if (preferred) ttsUtterance.voice = preferred;
+  ttsUtterance.onstart = () => { const s=document.getElementById('tts-status'); if(s) s.textContent='🔊 Speaking…'; };
+  ttsUtterance.onend   = () => { const s=document.getElementById('tts-status'); if(s) s.textContent='✅ Done!'; };
+  window.speechSynthesis.speak(ttsUtterance);
+  toast('🔊 Speaking…','s');
+}
+
+function stopTTS() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  const s = document.getElementById('tts-status'); if (s) s.textContent = '';
+}
+
+async function recordTTS() {
+  const text = document.getElementById('tts-text')?.value.trim();
+  if (!text) { toast('Enter some text first','e'); return; }
+  if (!window.speechSynthesis) { toast('Text-to-speech not supported','e'); return; }
+  stopTTS();
+  const btn = document.getElementById('tts-record-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏺ Recording…'; }
+  const statusEl = document.getElementById('tts-status');
+  if (statusEl) statusEl.textContent = '⏺ Recording audio…';
+
+  // Use AudioContext to capture speech synthesis output
+  try {
+    // Approach: use MediaRecorder on microphone to capture TTS playback
+    // Since Web Speech API doesn't expose a stream, we record the system audio
+    // via a workaround using AudioContext + oscillator to generate a sync pulse
+    // For best results: we use MediaRecorder on the document's audio stream
+    // Actually, we'll record with the Web Audio API by routing through it
+    const actx = new (window.AudioContext || window.webkitAudioContext)();
+    const dest  = actx.createMediaStreamDestination();
+    // Create a gain node and connect destination (for recording environment audio)
+    const rec   = new MediaRecorder(dest.stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm' });
+    const chunks = [];
+    rec.ondataavailable = e => { if (e.data?.size) chunks.push(e.data); };
+    rec.start(100);
+    // Speak now
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate  = parseFloat(document.getElementById('tts-rate')?.value) || 1;
+    utterance.pitch = parseFloat(document.getElementById('tts-pitch')?.value) || 1;
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (preferred) utterance.voice = preferred;
+    // Estimate duration from word count
+    const estDur = Math.ceil(text.split(/\s+/).length / (utterance.rate * 2.5));
+    // Wait estimated duration + buffer
+    window.speechSynthesis.speak(utterance);
+    await new Promise(ok => { utterance.onend = () => setTimeout(ok, 400); setTimeout(ok, (estDur+2)*1000); });
+    rec.stop();
+    await new Promise(ok => { rec.onstop = ok; });
+    const blob = new Blob(chunks, { type:'audio/webm' });
+    const url  = URL.createObjectURL(blob);
+    const id   = 'tts_' + Date.now();
+    const name = 'TTS_' + text.substring(0,20).replace(/[^a-zA-Z0-9]/g,'_');
+    ttsRecorded.push({ id, url, blob, text, name, dur: estDur });
+    // Add to LIBRARY
+    LIBRARY.push({ id, type:'audio', name, from:'Text to Speech', note:text.substring(0,100), event:'', size:(blob.size/1024).toFixed(0)+' KB', dur:estDur, url, thumb:null, file:null, created:Date.now() });
+    updSidebar(); renderTTSLibrary();
+    if (statusEl) statusEl.textContent = '✅ Saved to library!';
+    if (btn) { btn.disabled = false; btn.textContent = '⏺ Record & Save'; }
+    toast('✅ Voice saved to library!','s');
+    actx.close().catch(()=>{});
+  } catch(e) {
+    // Fallback: just mark as generated (browsers may block audio capture)
+    if (statusEl) statusEl.textContent = '⚠️ Recording not available in this browser — try Chrome/Edge';
+    if (btn) { btn.disabled = false; btn.textContent = '⏺ Record & Save'; }
+    toast('Use Chrome for best recording support','e');
+  }
+}
+
+function addTTSToStudio(idx) {
+  const r = ttsRecorded[idx]; if (!r) return;
+  ST.audioClips.push({ id:r.id, file:null, url:r.url, dur:r.dur, name:r.name, transcript:r.text });
+  if (S.user?.data?.timeline?.a) S.user.data.timeline.a.push(r.name.substring(0,12));
+  toast('✅ TTS audio added to studio','s');
+  nav('studio');
+}
+
+// ── THEMES ──
+const SURPRISE_THEMES = [
+  { id:'classic',   name:'Classic Orange',    desc:'Warm & celebratory — the SURPRIZE default',
+    colors:{ orange:'#FF6B1A', c1:'#FFF8F0', c2:'#FFF0E4', ink:'#1C1207' }, e:'🎉' },
+  { id:'royal',     name:'Royal Purple',      desc:'Elegant & prestigious',
+    colors:{ orange:'#6B21D9', c1:'#F8F0FF', c2:'#F0E8FF', ink:'#1A0A2E' }, e:'👑' },
+  { id:'emerald',   name:'Emerald Green',     desc:'Fresh, natural & vibrant',
+    colors:{ orange:'#0A7A4A', c1:'#F0FFF8', c2:'#E0FFF0', ink:'#0A2010' }, e:'💚' },
+  { id:'midnight',  name:'Midnight Dark',     desc:'Bold, modern & dramatic',
+    colors:{ orange:'#4A9EFF', c1:'#0D1117', c2:'#161B22', ink:'#E6EDF3' }, e:'🌙' },
+  { id:'rose',      name:'Rose Gold',         desc:'Soft, romantic & feminine',
+    colors:{ orange:'#C96B8A', c1:'#FFF0F4', c2:'#FFE0EA', ink:'#2E0A18' }, e:'🌹' },
+  { id:'naija',     name:'Naija Vibes',       desc:'Green-white-green Nigerian pride!',
+    colors:{ orange:'#008751', c1:'#F0FFF4', c2:'#E0FFE8', ink:'#0A1E10' }, e:'🇳🇬' },
+  { id:'gold',      name:'Gold & Black',      desc:'Luxurious, premium & VIP',
+    colors:{ orange:'#D4A820', c1:'#1A1500', c2:'#221D00', ink:'#F5E6A0' }, e:'✨' },
+  { id:'ocean',     name:'Ocean Blue',        desc:'Cool, calm & professional',
+    colors:{ orange:'#0070F3', c1:'#EFF6FF', c2:'#DBEAFE', ink:'#0A1628' }, e:'🌊' },
+  { id:'sunset',    name:'Sunset',            desc:'Warm gradient from orange to pink',
+    colors:{ orange:'#FF6B6B', c1:'#FFF0F0', c2:'#FFE4E4', ink:'#2E0A0A' }, e:'🌅' },
+];
+
+function renderThemes() {
+  const el = document.getElementById('themes-grid'); if (!el) return;
+  el.innerHTML = SURPRISE_THEMES.map(t => `
+    <div class="card" style="cursor:pointer;transition:.2s;border-color:${t.colors.orange}22"
+         onclick="applyTheme('${t.id}',this)"
+         onmouseenter="this.style.borderColor='${t.colors.orange}'"
+         onmouseleave="this.style.borderColor='${t.colors.orange}22'">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <div style="width:40px;height:40px;border-radius:10px;background:${t.colors.orange};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${t.e}</div>
+        <div><div style="font-weight:700;font-size:13px">${t.name}</div><div class="txt-xs txt-m">${t.desc}</div></div>
+      </div>
+      <div style="display:flex;gap:5px;margin-bottom:10px">
+        <div style="flex:1;height:20px;border-radius:5px;background:${t.colors.orange}"></div>
+        <div style="flex:1;height:20px;border-radius:5px;background:${t.colors.c1};border:1px solid ${t.colors.orange}33"></div>
+        <div style="flex:1;height:20px;border-radius:5px;background:${t.colors.ink}"></div>
+        <div style="flex:1;height:20px;border-radius:5px;background:${t.colors.c2};border:1px solid ${t.colors.orange}22"></div>
+      </div>
+      <button class="btn btn-sm btn-full" style="background:${t.colors.orange};color:#fff;border:none">Apply Theme</button>
+    </div>`).join('');
+
+  // Custom palette
+  const pal = document.getElementById('custom-palette'); if (!pal) return;
+  pal.innerHTML = [
+    {id:'custom-orange', label:'Primary', val:'#FF6B1A'},
+    {id:'custom-bg',     label:'Background', val:'#FFF8F0'},
+    {id:'custom-card',   label:'Card', val:'#FFF0E4'},
+    {id:'custom-ink',    label:'Text', val:'#1C1207'},
+  ].map(p => `
+    <div style="text-align:center">
+      <input type="color" value="${p.val}" id="${p.id}" style="width:100%;height:40px;border:none;border-radius:8px;cursor:pointer;padding:2px">
+      <div class="txt-xs txt-m mt8">${p.label}</div>
+    </div>`).join('');
+}
+
+function applyTheme(id) {
+  const t = SURPRISE_THEMES.find(x=>x.id===id); if (!t) return;
+  const root = document.documentElement.style;
+  root.setProperty('--orange', t.colors.orange);
+  root.setProperty('--oran2',  adjustColor(t.colors.orange, 30));
+  root.setProperty('--c1',     t.colors.c1);
+  root.setProperty('--c2',     t.colors.c2);
+  root.setProperty('--ink',    t.colors.ink);
+  root.setProperty('--oran-l', hexToRgba(t.colors.orange, 0.1));
+  root.setProperty('--oran-m', hexToRgba(t.colors.orange, 0.3));
+  toast(`🎨 "${t.name}" theme applied!`,'s');
+}
+
+function applyCustomTheme() {
+  const o  = document.getElementById('custom-orange')?.value || '#FF6B1A';
+  const bg = document.getElementById('custom-bg')?.value    || '#FFF8F0';
+  const c2 = document.getElementById('custom-card')?.value  || '#FFF0E4';
+  const ink= document.getElementById('custom-ink')?.value   || '#1C1207';
+  const root = document.documentElement.style;
+  root.setProperty('--orange', o); root.setProperty('--c1', bg);
+  root.setProperty('--c2', c2);    root.setProperty('--ink', ink);
+  root.setProperty('--oran-l', hexToRgba(o, 0.1));
+  root.setProperty('--oran-m', hexToRgba(o, 0.3));
+  toast('🎨 Custom theme applied!','s');
+}
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function adjustColor(hex, amount) {
+  const r=Math.min(255,parseInt(hex.slice(1,3),16)+amount);
+  const g=Math.min(255,parseInt(hex.slice(3,5),16)+amount);
+  const b=Math.min(255,parseInt(hex.slice(5,7),16)+amount);
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+// ── AUTO-GENERATE OPENING TITLE FROM ACTIVE EVENT ──
+function autoFillSlideshowFromEvent() {
+  const ev = S.user?.data?.events?.find(e=>e.status==='active');
+  if (!ev) return;
+  const openEl = document.getElementById('ss-open');
+  const subEl  = document.getElementById('ss-open-sub');
+  const closeEl= document.getElementById('ss-close');
+  if (openEl && !openEl.value) openEl.value = `Happy ${ev.occ}! ${ev.emoji}`;
+  if (subEl  && !subEl.value)  subEl.value  = `Celebrating ${ev.cel}`;
+  if (closeEl && !closeEl.value) closeEl.value = `With love, from everyone 💕`;
+  updateSSStats();
+  toast(`✅ Auto-filled from "${ev.title}"`, 's');
+}
+
+// ── WHATSAPP SHARE ──
+function shareToWhatsApp(text, link) {
+  const msg = encodeURIComponent(`${text}\n\n${link}`);
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
+  toast('📱 Opening WhatsApp…','s');
+}
+
+// ── PATCH nav() TO INIT NEW PAGES ──
+const _navPrev = window.nav || function(){};
+window.nav = function(p) {
+  _navPrev(p);
+  if (p==='reactions') renderReactions();
+  if (p==='tts')       { initTTS(); }
+  if (p==='themes')    renderThemes();
+  if (window.innerWidth<=900) closeMobileSidebar?.();
+};
+
+// Mobile nav update for new pages
+document.addEventListener('DOMContentLoaded', () => {
+  // Patch initSlideshow to auto-fill event details
+  const _origInitSS = window.initSlideshow;
+  window.initSlideshow = function() {
+    _origInitSS?.();
+    autoFillSlideshowFromEvent();
+  };
+  // Pre-load voices list for TTS
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {};
+    window.speechSynthesis.getVoices();
+  }
+});
+
+
+
+// ── PLAN USAGE DISPLAY ──
+function renderPlanUsage() {
+  const el = document.getElementById('plan-usage-content'); if (!el) return;
+  const u = S.user; if (!u) return;
+  const t = getUserTier(u);
+  const isDemo = isDemoUser(u);
+  const vidUsed = LIBRARY.filter(x => x.type==='video' && isThisMonth(x.created)).length;
+  const msgUsed = u.data.monthlyMsgCount || 0;
+  const pts     = u.data.points || 0;
+
+  if (isDemo) {
+    el.innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--green)">🚀 Demo Account — Unlimited Access</div>
+      <div class="txt-xs txt-m mt8">All features unlocked · ${pts} reward points</div>`;
+    return;
+  }
+
+  const vidLim = t.videoUploads === Infinity ? '∞' : t.videoUploads;
+  const msgLim = t.msgAllowance === Infinity ? '∞' : t.msgAllowance;
+  const vidPct = t.videoUploads === Infinity ? 0 : Math.min(100, vidUsed / t.videoUploads * 100);
+  const msgPct = t.msgAllowance === Infinity ? 0 : Math.min(100, msgUsed / t.msgAllowance * 100);
+
+  el.innerHTML = `
+    <div style="margin-bottom:8px">
+      <div class="fl-bc mb5" style="font-size:11px"><span>🎬 Video uploads</span><span class="mono">${vidUsed}/${vidLim}</span></div>
+      <div class="prog"><div class="prog-f" style="width:${vidPct}%;background:${vidPct>=90?'var(--red)':'var(--orange)'}"></div></div>
+    </div>
+    <div style="margin-bottom:8px">
+      <div class="fl-bc mb5" style="font-size:11px"><span>💬 Messages</span><span class="mono">${msgUsed}/${msgLim}</span></div>
+      <div class="prog"><div class="prog-f" style="width:${msgPct}%;background:${msgPct>=90?'var(--red)':'var(--green)'}"></div></div>
+    </div>
+    <div class="fl-bc" style="font-size:11px;margin-top:6px">
+      <span>🎁 Reward Points</span><span class="mono fw7" style="color:var(--orange)">${pts}</span>
+    </div>`;
+}
+
+// Patch initUpload to show plan usage
+const _origInitUpload = window.initUpload || function(){};
+window.initUpload = function() {
+  _origInitUpload();
+  renderPlanUsage();
+};
+
+// Patch renderDash to show points
+const _origRenderDash = window.renderDash || function(){};
+window.renderDash = function() {
+  _origRenderDash();
+  const stRa = document.getElementById('st-ra');
+  if (stRa && S.user) stRa.textContent = (S.user.data?.points || 0) + ' pts';
+};
+
+// ── REFERRAL SYSTEM ──
+function handleReferral(referrerEmail) {
+  const referrer = S.users[referrerEmail] || DEMO_ACCOUNTS[referrerEmail];
+  if (!referrer) return;
+  const pts = awardPoints(referrer, 'referral');
+  if (referrerEmail in S.users) localStorage.setItem('sz3_users', JSON.stringify(S.users));
+  toast(`🎁 ${referrer.name} earned ${pts} referral points!`, 's');
+}
+
+// Patch doReg to handle referral
+const _origDoReg = window.doReg || function(){};
+window.doReg = function() {
+  _origDoReg();
+  // Check if referral code present (from URL)
+  const ref = new URLSearchParams(window.location.search).get('ref');
+  if (ref) handleReferral(ref);
+};
+
+// ── PLAN BADGE IN SIDEBAR ──
+const _origUpdSidebar = window.updSidebar || function(){};
+window.updSidebar = function() {
+  _origUpdSidebar();
+  // Update plan badge colour based on tier
+  const u = S.user; if (!u) return;
+  const t = getUserTier(u);
+  const av = document.getElementById('sb-av');
+  if (av) {
+    const colors = {
+      freemium: 'linear-gradient(135deg,#8090A8,#5C6B8A)',
+      standard: 'linear-gradient(135deg,#0A7A4A,#0F9E5E)',
+      gold:     'linear-gradient(135deg,#FF6B1A,#FF9A4A)',
+      elite:    'linear-gradient(135deg,#6B21D9,#A855F7)',
+      demo:     'linear-gradient(135deg,#FF6B1A,#FF9A4A)'
+    };
+    av.style.background = colors[u.tier] || colors.freemium;
+  }
+};
+
+// ── PLAN LIMIT INDICATOR ON STUDIO AI BUTTON ──
+function initStudioPlanBadges() {
+  const aiBtn = document.getElementById('aiBtn');
+  if (!aiBtn) return;
+  const u = S.user; if (!u) return;
+  const t = getUserTier(u);
+  if (!t.ai && !isDemoUser(u)) {
+    aiBtn.title = 'Requires Gold plan';
+    aiBtn.style.opacity = '0.5';
+  }
+}
+
+// Call plan badges after studio init
+const _origInitStudio = window.initStudio || function(){};
+window.initStudio = function() {
+  _origInitStudio();
+  setTimeout(initStudioPlanBadges, 100);
+};
+
+// ── MESSAGES COUNTER ON TEXT SAVE ──
+const _origSaveTextUpload = window.saveTextUpload || function(){};
+window.saveTextUpload = function() {
+  const ck = checkPlanLimit('message');
+  if (!ck.allowed) { showUpgradePrompt(ck.msg); return; }
+  if (S.user?.data) S.user.data.monthlyMsgCount = (S.user.data.monthlyMsgCount||0)+1;
+  _origSaveTextUpload();
+};
 </script>
 
 <!-- MOBILE NAV BAR -->
@@ -3402,6 +4353,7 @@ window.addEventListener('resize',()=>{
     <button onclick="nav('events')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;color:var(--mud);font-size:10px;font-weight:700"><span style="font-size:18px">🎉</span>Events</button>
     <button onclick="nav('upload')" style="background:var(--orange);border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 16px;border-radius:50%;color:#fff;font-size:10px;font-weight:700;margin-top:-16px;box-shadow:0 4px 16px rgba(255,107,26,.4)"><span style="font-size:22px">＋</span></button>
     <button onclick="nav('library')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;color:var(--mud);font-size:10px;font-weight:700"><span style="font-size:18px">🗂️</span>Library</button>
+    <button onclick="nav('reactions')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;color:var(--mud);font-size:10px;font-weight:700"><span style="font-size:18px">😍</span>React</button>
     <button onclick="toggleMobileSidebar()" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;color:var(--mud);font-size:10px;font-weight:700"><span style="font-size:18px">☰</span>More</button>
   </div>
 </div>

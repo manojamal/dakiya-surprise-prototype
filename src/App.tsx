@@ -50,30 +50,55 @@ export default function App() {
 
   // Persistence state loaders
   const [user, setUser] = useState<UserProfile | null>(() => {
-    const saved = localStorage.getItem('zz_logged_user');
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = localStorage.getItem('zz_logged_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      console.warn('Failed to parse zz_logged_user from localStorage', e);
+      return null;
+    }
   });
 
   const [prefilledContact, setPrefilledContact] = useState<BirthdayContact | null>(null);
 
   const [events, setEvents] = useState<CelebrativeEvent[]>(() => {
-    const saved = localStorage.getItem('zz_events');
-    return saved ? JSON.parse(saved) : seedData().events;
+    try {
+      const saved = localStorage.getItem('zz_events');
+      return saved ? JSON.parse(saved) : seedData().events;
+    } catch (e) {
+      console.warn('Failed to parse zz_events from localStorage', e);
+      return seedData().events;
+    }
   });
 
   const [birthdays, setBirthdays] = useState<BirthdayContact[]>(() => {
-    const saved = localStorage.getItem('zz_birthdays');
-    return saved ? JSON.parse(saved) : seedData().birthdays;
+    try {
+      const saved = localStorage.getItem('zz_birthdays');
+      return saved ? JSON.parse(saved) : seedData().birthdays;
+    } catch (e) {
+      console.warn('Failed to parse zz_birthdays from localStorage', e);
+      return seedData().birthdays;
+    }
   });
 
   const [activity, setActivity] = useState<ActivityFeedItem[]>(() => {
-    const saved = localStorage.getItem('zz_activity');
-    return saved ? JSON.parse(saved) : seedData().activity;
+    try {
+      const saved = localStorage.getItem('zz_activity');
+      return saved ? JSON.parse(saved) : seedData().activity;
+    } catch (e) {
+      console.warn('Failed to parse zz_activity from localStorage', e);
+      return seedData().activity;
+    }
   });
 
   const [media, setMedia] = useState<MediaItem[]>(() => {
-    const saved = localStorage.getItem('zz_media');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('zz_media');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      console.warn('Failed to parse zz_media from localStorage', e);
+      return [];
+    }
   });
 
   // UI state managers
@@ -93,12 +118,22 @@ export default function App() {
 
   // Video Studio timeline clips
   const [studioClips, setStudioClips] = useState<any[]>(() => {
-    const saved = localStorage.getItem('zz_studio_clips');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('zz_studio_clips');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      console.warn('Failed to parse zz_studio_clips from localStorage', e);
+      return [];
+    }
   });
   const [studioTimeline, setStudioTimeline] = useState<number[]>(() => {
-    const saved = localStorage.getItem('zz_studio_timeline');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('zz_studio_timeline');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      console.warn('Failed to parse zz_studio_timeline from localStorage', e);
+      return [];
+    }
   });
 
   // Synchronize dynamic changes into localStorage
